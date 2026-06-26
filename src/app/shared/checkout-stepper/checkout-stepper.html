@@ -1,0 +1,18 @@
+<div class="stepper">
+  @for (step of steps; track step.number) {
+    <div class="step" [class.step--active]="step.number === activeStep"
+         [class.step--done]="step.number < activeStep">
+      <div class="step__circle">
+        @if (step.number < activeStep) {
+          <span class="step__check">✓</span>
+        } @else {
+          {{ step.number }}
+        }
+      </div>
+      <span class="step__label">{{ step.label }}</span>
+    </div>
+    @if (!$last) {
+      <div class="step__line" [class.step__line--done]="step.number < activeStep"></div>
+    }
+  }
+</div>

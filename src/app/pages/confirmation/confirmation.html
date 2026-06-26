@@ -1,0 +1,165 @@
+<app-header></app-header>
+<app-checkout-stepper [activeStep]="5"></app-checkout-stepper>
+
+<div class="confirm-container">
+  <div class="confirm-main">
+
+    <!-- Success Banner -->
+    <div class="success-banner">
+      <div class="success-banner__icon">✅</div>
+      <div class="success-banner__content">
+        <h1>Order Placed Successfully!</h1>
+        <p>Thank you for your order. We've received it and will begin processing immediately.</p>
+      </div>
+      <div class="success-banner__order">
+        <div class="order-num-label">Order Number</div>
+        <div class="order-num">#{{ orderNumber }}</div>
+        <div class="order-date">Placed on December 19, 2024 · 10:43 AM</div>
+      </div>
+    </div>
+
+    <!-- Order Items -->
+    <div class="confirm-card">
+      <div class="confirm-card__header">
+        <span>📦 Order Items</span>
+        <span>{{ orderItems.length }} line items</span>
+      </div>
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th>Part Number</th>
+            <th>Description</th>
+            <th>Qty</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of orderItems; track item.product.id) {
+            <tr>
+              <td><a class="part-link">{{ item.product.manufacturerPartNumber }}</a><br/>
+                <small>{{ item.product.manufacturer }}</small></td>
+              <td>{{ item.product.description || item.product.productType }}</td>
+              <td>{{ item.qty }}</td>
+              <td>${{ (item.product.price/84).toFixed(2) }}</td>
+              <td>${{ ((item.product.price/84) * item.qty).toFixed(2) }}</td>
+            </tr>
+          }
+        </tbody>
+        <tfoot>
+          <tr><td colspan="4">Subtotal ({{ orderItems.length }} items)</td><td>${{ orderSubtotal.toFixed(2) }}</td></tr>
+          <tr><td colspan="4">Shipping</td><td class="free">Free</td></tr>
+          <tr><td colspan="4">Tax (0%)</td><td>$0.00</td></tr>
+          <tr class="order-table__total"><td colspan="4">Order Total</td><td>${{ orderSubtotal.toFixed(2) }}</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- What Happens Next -->
+    <div class="confirm-card">
+      <div class="confirm-card__header"><span>📋 What Happens Next</span></div>
+      <div class="next-steps">
+        <div class="next-step">
+          <div class="next-step__icon next-step__icon--done">✉</div>
+          <div class="next-step__content">
+            <strong>Confirmation Email Sent</strong>
+            <span class="status-badge status-badge--done">Done</span>
+            <p>A full order summary has been sent to lkhorgan&#64;acmecorp.com</p>
+          </div>
+        </div>
+        <div class="next-step">
+          <div class="next-step__icon next-step__icon--progress">📄</div>
+          <div class="next-step__content">
+            <strong>Purchase Order Processing</strong>
+            <span class="status-badge status-badge--progress">In Progress</span>
+            <p>Your PO is being reviewed. Expected approval within 1 business day.</p>
+          </div>
+        </div>
+        <div class="next-step">
+          <div class="next-step__icon">📦</div>
+          <div class="next-step__content">
+            <strong>Fulfillment &amp; Shipping</strong>
+            <p>Items will ship within 4-6 weeks. Tracking info will be emailed when dispatched.</p>
+          </div>
+        </div>
+        <div class="next-step">
+          <div class="next-step__icon">🚚</div>
+          <div class="next-step__content">
+            <strong>Delivery</strong>
+            <p>Estimated delivery: January 26 – February 11, 2025</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="confirm-actions">
+      <button class="btn-download">⬇ Download Order Summary (PDF)</button>
+      <button class="btn-print">🖨 Print Confirmation</button>
+      <button class="btn-history">📋 View Order History</button>
+    </div>
+  </div>
+
+  <!-- Right Sidebar -->
+  <div class="confirm-sidebar">
+    <!-- Order Details -->
+    <div class="confirm-card">
+      <div class="confirm-card__header"><span>📋 Order Details</span></div>
+      <div class="order-details">
+        <div class="detail-row"><span>Order Number</span><a class="part-link">#{{ orderNumber }}</a></div>
+        <div class="detail-row"><span>Date Placed</span><span>Dec 19, 2024</span></div>
+        <div class="detail-row"><span>Payment Method</span><span>Net 30 — Account</span></div>
+        <div class="detail-row"><span>PO Number</span><span>PO-ACME-8841</span></div>
+        <div class="detail-row"><span>Lead Time</span><span>4–6 weeks</span></div>
+      </div>
+    </div>
+
+    <!-- Shipping Address -->
+    <div class="confirm-card">
+      <div class="confirm-card__header"><span>📍 Shipping Address</span></div>
+      <div class="sidebar-address">
+        <strong>Robert Chen</strong>
+        <span>Acme Corporation</span>
+        <span>5224 Industrial Blvd, Suite 400</span>
+        <span>Austin, TX 78701</span>
+        <span>United States</span>
+        <div class="shipping-method-small">
+          <span>🚚</span> Standard Ground — estimated Jan 26 – Feb 11
+        </div>
+      </div>
+    </div>
+
+    <!-- Billing -->
+    <div class="confirm-card">
+      <div class="confirm-card__header"><span>💳 Billing</span></div>
+      <div class="sidebar-address">
+        <div class="detail-row"><span>Address</span><span>Same as shipping address</span></div>
+        <div class="detail-row"><span>Terms</span><span>Net 30</span></div>
+        <div class="detail-row"><span>Invoice Due</span><span>Jan 18, 2025</span></div>
+      </div>
+    </div>
+
+    <!-- Questions -->
+    <div class="confirm-card confirm-card--blue">
+      <div class="confirm-card__header"><span>🎧 Questions About Your Order?</span></div>
+      <div class="sidebar-help">
+        <p>Contact our order management team with your order number for status updates or changes.</p>
+        <button class="btn-contact">Contact Order Management</button>
+        <button class="btn-chat">💬 Live Chat</button>
+      </div>
+    </div>
+
+    <!-- Continue Shopping -->
+    <div class="confirm-card">
+      <div class="confirm-card__header"><span>🛒 Continue Shopping</span></div>
+      <div class="sidebar-links">
+        <a routerLink="/">⬡ Browse Electromechanical</a>
+        <a routerLink="/">⭐ Schneider Electric Products</a>
+        <a routerLink="/">🕐 Your Recently Viewed Parts</a>
+        <a routerLink="/">📋 Your Saved Lists</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,162 @@
+<app-header></app-header>
+<app-checkout-stepper [activeStep]="2"></app-checkout-stepper>
+
+<div class="checkout-layout">
+  <div class="checkout-main">
+    <h1 class="page-title">Shipping Details</h1>
+
+    <!-- Saved Addresses -->
+    <div class="checkout-card">
+      <div class="checkout-card__header">
+        <span>📍 Saved Addresses</span>
+        <button class="btn-link">+ Add New Address</button>
+      </div>
+      <div class="address-grid">
+        @for (addr of checkout.savedAddresses(); track $index) {
+          <div class="address-card" [class.selected]="selectedAddress() === $index"
+               (click)="selectedAddress.set($index)">
+            <div class="address-card__radio">
+              <input type="radio" [checked]="selectedAddress() === $index"/>
+            </div>
+            <div class="address-card__content">
+              <strong>{{ addr.firstName }} {{ addr.lastName }}</strong>
+              <span>{{ addr.company }}</span>
+              <span>{{ addr.address1 }}</span>
+              <span>{{ addr.city }}, {{ addr.state }} {{ addr.zip }}</span>
+              <span>{{ addr.country }}</span>
+              @if (addr.isDefault) {
+                <span class="default-badge">Default</span>
+              }
+            </div>
+            <button class="btn-edit">Edit</button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- New Address Form -->
+    <div class="checkout-card">
+      <div class="checkout-card__header"><span>📝 Enter a New Address</span></div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" placeholder="Robert"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input type="text" placeholder="Chen"/>
+        </div>
+        <div class="form-group form-group--full">
+          <label>Company / Organization</label>
+          <input type="text" placeholder="Acme Electronics Inc."/>
+        </div>
+        <div class="form-group form-group--full">
+          <label>Address Line 1 *</label>
+          <input type="text" placeholder="Street address"/>
+        </div>
+        <div class="form-group form-group--full">
+          <label>Address Line 2</label>
+          <input type="text" placeholder="Suite, floor, unit..."/>
+        </div>
+        <div class="form-group">
+          <label>City *</label>
+          <input type="text" placeholder="San Francisco"/>
+        </div>
+        <div class="form-group">
+          <label>ZIP / Postal Code *</label>
+          <input type="text" placeholder="94105"/>
+        </div>
+        <div class="form-group">
+          <label>State / Province *</label>
+          <select>
+            <option>California</option>
+            <option>New York</option>
+            <option>Texas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Country *</label>
+          <select>
+            <option>United States</option>
+            <option>India</option>
+            <option>United Kingdom</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" placeholder="+1 (415) 555-0192"/>
+        </div>
+        <div class="form-group">
+          <label>PO Number (optional)</label>
+          <input type="text" placeholder="PO-2025-021"/>
+        </div>
+        <div class="form-group form-group--full">
+          <label class="checkbox-label">
+            <input type="checkbox"/>
+            Save this address to my account
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shipping Method -->
+    <div class="checkout-card">
+      <div class="checkout-card__header"><span>🚚 Shipping Method</span></div>
+      <div class="shipping-methods">
+        @for (method of checkout.shippingMethods; track method.id) {
+          <div class="shipping-method" [class.selected]="selectedMethod() === method.id"
+               (click)="selectedMethod.set(method.id)">
+            <input type="radio" [checked]="selectedMethod() === method.id"/>
+            <div class="shipping-method__info">
+              <strong>{{ method.label }}</strong>
+            </div>
+            <div class="shipping-method__price">
+              @if (method.price === 0) { <span class="free">FREE</span> }
+              @else { ${{ method.price.toFixed(2) }} }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Delivery Notes -->
+    <div class="checkout-card">
+      <div class="checkout-card__header"><span>📋 Delivery Notes (Optional)</span></div>
+      <textarea placeholder="Special delivery instructions..." rows="3"></textarea>
+    </div>
+
+    <div class="checkout-nav">
+      <a routerLink="/cart" class="btn-back">← Back to Cart</a>
+      <button class="btn-continue" (click)="continueToPayment()">Continue to Payment →</button>
+    </div>
+  </div>
+
+  <!-- Order Summary Sidebar -->
+  <div class="order-sidebar">
+    <div class="checkout-card">
+      <div class="checkout-card__header"><span>📋 Order Summary</span></div>
+      <div class="sidebar-items">
+        @for (item of cart.items(); track item.product.id) {
+          <div class="sidebar-item">
+            <span class="sidebar-item__name">{{ item.product.title }}</span>
+            <span class="sidebar-item__qty">× {{ item.qty }}</span>
+            <span class="sidebar-item__price">${{ ((item.product.price/84)*item.qty).toFixed(2) }}</span>
+          </div>
+        }
+      </div>
+      <div class="sidebar-totals">
+        <div class="summary-row"><span>Subtotal</span><span>${{ cart.subtotal().toFixed(2) }}</span></div>
+        <div class="summary-row"><span>Shipping</span><span class="free">FREE</span></div>
+        <div class="summary-row"><span>Tax (8.5%)</span><span>${{ cart.tax().toFixed(2) }}</span></div>
+        <div class="summary-row summary-row--total"><span>Total</span><span class="total">${{ cart.total().toFixed(2) }}</span></div>
+      </div>
+      <div class="trust-list">
+        <div>🔒 SSL-secured checkout</div>
+        <div>🚚 Free shipping over $50</div>
+        <div>💳 Visa, MC, Amex, Wire, Net 30</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

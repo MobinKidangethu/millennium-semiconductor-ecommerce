@@ -1,0 +1,161 @@
+@use '../shipping/shipping.scss';
+
+.payment-methods {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.payment-method-tab {
+  border: 2px solid #e0e6ee;
+  border-radius: 8px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+
+  &.active {
+    border-color: #1a3a6b;
+    background: #f5f8fd;
+  }
+
+  .pmt-icon { font-size: 28px; }
+  .pmt-label { font-size: 12px; color: #555; font-weight: 500; }
+  .pmt-radio input { accent-color: #1a3a6b; }
+}
+
+.card-icons { display: flex; gap: 4px; }
+
+.card-badge {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #555;
+}
+
+.card-number-input {
+  position: relative;
+
+  input { padding-right: 38px; width: 100%; box-sizing: border-box; }
+
+  .card-number-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+  }
+}
+
+.billing-section { padding: 16px 20px; }
+
+.billing-same {
+  background: #f5f8fd;
+  border: 1px solid #1a3a6b;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.billing-addr {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  color: #555;
+
+  span:first-child { font-size: 20px; }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    strong { color: #1a1a2e; font-size: 14px; }
+    a { color: #1a3a6b; text-decoration: none; margin-top: 4px; font-size: 12px; font-weight: 600;
+      &:hover { text-decoration: underline; }
+    }
+  }
+}
+
+.info-box {
+  padding: 20px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+
+  p { margin: 0 0 10px; }
+  strong { color: #1a1a2e; }
+  a { color: #1a3a6b; }
+}
+
+.sidebar-ship-to {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: #666;
+
+  span:first-child { font-weight: 700; color: #333; }
+}
+
+// Re-declare checkout-layout for this page context since SCSS @use doesn't re-export classes
+.checkout-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 28px;
+  align-items: start;
+}
+
+.page-title { font-size: 22px; font-weight: 700; color: #1a1a2e; margin: 0 0 20px; }
+
+.checkout-card {
+  background: white; border: 1px solid #e0e6ee; border-radius: 8px; overflow: hidden; margin-bottom: 20px;
+  &__header {
+    background: #f8fafc; border-bottom: 1px solid #e0e6ee; padding: 12px 20px;
+    font-size: 14px; font-weight: 700; color: #1a1a2e; display: flex; align-items: center; justify-content: space-between;
+  }
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 5px;
+  &--full { grid-column: span 2; }
+  label { font-size: 12px; font-weight: 600; color: #555; }
+  input { border: 1px solid #ddd; border-radius: 4px; padding: 9px 12px; font-size: 13px; color: #333;
+    outline: none; width: 100%; box-sizing: border-box;
+    &:focus { border-color: #1a3a6b; }
+  }
+}
+
+.checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #444; cursor: pointer;
+  input { accent-color: #1a3a6b; }
+}
+
+.checkout-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 8px; }
+.btn-back { color: #1a3a6b; font-size: 13px; text-decoration: none; font-weight: 600; &:hover { text-decoration: underline; } }
+.btn-continue { background: #1a3a6b; color: white; border: none; padding: 12px 32px; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; &:hover { background: #0f2550; } }
+
+.order-sidebar { position: sticky; top: 20px; }
+.sidebar-items { padding: 12px 20px; border-bottom: 1px solid #f0f0f0; display: flex; flex-direction: column; gap: 8px; }
+.sidebar-item { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; font-size: 12px; color: #555;
+  &__name { color: #1a3a6b; font-weight: 600; }
+  &__qty { color: #888; }
+  &__price { font-weight: 700; color: #1a1a2e; }
+}
+.sidebar-totals { padding: 12px 20px; border-bottom: 1px solid #f0f0f0; }
+.summary-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; color: #555;
+  &--total { margin-top: 4px; padding-top: 10px; border-top: 1px solid #e0e6ee; font-weight: 700; color: #1a1a2e; }
+}
+.free { color: #1a8040; font-weight: 700; }
+.total { color: #1a3a6b; font-size: 16px; font-weight: 800; }

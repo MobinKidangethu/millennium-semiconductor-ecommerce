@@ -1,0 +1,138 @@
+.footer {
+  background: #0f1923;
+  color: #9aa5b4;
+  margin-top: 60px;
+}
+
+.footer__main { padding: 48px 0 32px; }
+
+.footer__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+  gap: 40px;
+}
+
+.footer__brand { }
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+
+  &__name {
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 1px;
+  }
+
+  &__sub {
+    font-size: 8px;
+    color: #c8a44a;
+    letter-spacing: 1.5px;
+  }
+}
+
+.footer__desc {
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+
+.footer__social {
+  display: flex;
+  gap: 10px;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: #1e2d3d;
+    color: #9aa5b4;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+
+    &:hover { background: #1a3a6b; color: white; }
+  }
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  h4 {
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  a {
+    color: #9aa5b4;
+    text-decoration: none;
+    font-size: 12px;
+    &:hover { color: #c8d8f0; }
+  }
+}
+
+.footer__newsletter p {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0;
+
+  input {
+    flex: 1;
+    border: 1px solid #2d3f50;
+    border-right: none;
+    background: #1a2535;
+    color: white;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 3px 0 0 3px;
+    outline: none;
+
+    &::placeholder { color: #5a6a7a; }
+  }
+
+  button {
+    background: #1a3a6b;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 0 3px 3px 0;
+    transition: background 0.2s;
+
+    &:hover { background: #2a5aab; }
+  }
+}
+
+.footer__bottom {
+  border-top: 1px solid #1e2d3d;
+  padding: 14px 0;
+
+  .footer__inner {
+    display: flex;
+    justify-content: space-between;
+    grid-template-columns: unset;
+    font-size: 11px;
+  }
+}

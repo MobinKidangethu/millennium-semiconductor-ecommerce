@@ -1,0 +1,151 @@
+<app-header></app-header>
+
+@if (product(); as p) {
+<div class="page-container">
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    <a routerLink="/">Home</a> › <a href="#">Semiconductors</a> › <span>{{ p.title }}</span>
+  </nav>
+
+  <!-- Product Main -->
+  <div class="product-layout">
+    <!-- Left: Images -->
+    <div class="product-images">
+      <div class="product-images__main">
+        <span class="product-images__placeholder">🔧</span>
+      </div>
+      <div class="product-images__thumbs">
+        @for (i of [0, 1, 2, 3]; track i) {
+          <div class="product-images__thumb" [class.active]="activeImage() === i"
+               (click)="activeImage.set(i)">🔧</div>
+        }
+      </div>
+    </div>
+
+    <!-- Middle: Info -->
+    <div class="product-info">
+      <div class="product-info__badges">
+        @if (p.rohs) {
+          <span class="badge badge--green">✓ RoHS</span>
+        }
+        <span class="badge badge--blue">{{ p.lifecycle }}</span>
+      </div>
+
+      <div class="product-info__mfr">{{ p.manufacturer }}</div>
+      <h1 class="product-info__title">{{ p.title }}</h1>
+      <p class="product-info__desc">{{ p.description }}</p>
+
+      <div class="product-info__meta">
+        <div class="meta-row">
+          <span>Mouser #:</span><strong>{{ p.mouserPartNumber }}</strong>
+        </div>
+        <div class="meta-row">
+          <span>Mfr. #:</span><strong>{{ p.manufacturerPartNumber }}</strong>
+        </div>
+        <div class="meta-row">
+          <span>Package:</span><strong>{{ p.package || 'N/A' }}</strong>
+        </div>
+      </div>
+
+      <div class="product-info__stock" [class.in-stock]="p.stockStatus === 'In Stock'">
+        <span>●</span> {{ p.stockStatus }} — {{ p.availability.toLocaleString() }} units
+      </div>
+
+      <a [href]="p.datasheet" target="_blank" class="datasheet-link">📄 Download Datasheet</a>
+    </div>
+
+    <!-- Right: Pricing / Add to Cart -->
+    <div class="product-purchase">
+      <div class="product-purchase__price">{{ usdPrice }}</div>
+      <div class="product-purchase__unit">/ unit (1-9 pcs)</div>
+
+      <!-- Price breaks table -->
+      <table class="price-table">
+        <thead>
+          <tr><th>Qty</th><th>Unit Price</th></tr>
+        </thead>
+        <tbody>
+          @for (pb of priceBreaks; track pb.qty) {
+            <tr>
+              <td>{{ pb.qty }}</td>
+              <td>${{ pb.price }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      <div class="qty-control">
+        <button (click)="changeQty(-1)">−</button>
+        <span>{{ quantity() }}</span>
+        <button (click)="changeQty(1)">+</button>
+      </div>
+
+      <button class="btn-cart" (click)="addToCart()" [class.btn-cart--added]="added()">
+        @if (added()) { ✓ Added to Cart } @else { 🛒 Add to Cart }
+      </button>
+
+      <a routerLink="/cart" class="btn-quote">📋 Request a Quote</a>
+
+      <div class="trust-badges">
+        <span>🔒 Secure Checkout</span>
+        <span>🚚 Free shipping over $50</span>
+        <span>↩ 18-month warranty</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tabs__nav">
+      @for (tab of ['specs', 'documents', 'related'] ; track tab) {
+        <button class="tabs__btn" [class.active]="activeTab() === tab"
+                (click)="activeTab.set(tab)">
+          {{ tab === 'specs' ? 'Specifications' : tab === 'documents' ? 'Documents & Wiring' : 'Related Parts' }}
+        </button>
+      }
+    </div>
+
+    <div class="tabs__content">
+      @if (activeTab() === 'specs') {
+        <div class="spec-section">
+          <div class="spec-section__header">Main Specifications</div>
+          <div class="spec-grid">
+            <div class="spec-row"><span>Product Category</span><span>{{ p.category }}</span></div>
+            <div class="spec-row"><span>Product Type</span><span>{{ p.productType }}</span></div>
+            <div class="spec-row"><span>Manufacturer</span><span>{{ p.manufacturer }}</span></div>
+            <div class="spec-row"><span>Technology</span><span>{{ p.technology }}</span></div>
+            <div class="spec-row"><span>Mounting Style</span><span>{{ p.mountingStyle }}</span></div>
+            <div class="spec-row"><span>Package</span><span>{{ p.package || 'N/A' }}</span></div>
+            <div class="spec-row"><span>Stock Type</span><span>{{ p.stockType }}</span></div>
+            <div class="spec-row"><span>Lifecycle</span><span>{{ p.lifecycle }}</span></div>
+            <div class="spec-row"><span>RoHS Status</span><span>{{ p.rohsLabel }}</span></div>
+          </div>
+        </div>
+      }
+
+      @if (activeTab() === 'documents') {
+        <div class="empty-tab">
+          <p>📄 <a [href]="p.datasheet" target="_blank">Download Datasheet (PDF)</a></p>
+        </div>
+      }
+
+      @if (activeTab() === 'related') {
+        <div class="related-products">
+          @for (rp of related(); track rp.id) {
+            <div class="related-card">
+              <a [routerLink]="['/product', rp.id]">{{ rp.title }}</a>
+              <span>{{ rp.manufacturer }}</span>
+              <span>${{ (rp.price/84).toFixed(2) }}</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>
+} @else {
+  <div class="loading">Loading product...</div>
+}
+
+<app-footer></app-footer>

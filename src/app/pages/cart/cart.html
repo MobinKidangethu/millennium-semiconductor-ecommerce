@@ -1,0 +1,137 @@
+<app-header></app-header>
+<app-checkout-stepper [activeStep]="1"></app-checkout-stepper>
+
+<div class="cart-container">
+  <div class="cart-main">
+    <div class="cart-header">
+      <h1>Shopping Cart</h1>
+      <span class="cart-header__count">{{ cart.itemCount() }} items</span>
+    </div>
+
+    @if (cart.items().length > 0) {
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th colspan="2">Product</th>
+            <th>Unit Price</th>
+            <th>Qty</th>
+            <th>Extended</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of cart.items(); track item.product.id) {
+            <tr>
+              <td class="cart-table__img-cell">
+                <div class="cart-item-img">🔧</div>
+              </td>
+              <td class="cart-table__product">
+                <div class="cart-item-mfr">{{ item.product.manufacturer }}</div>
+                <a [routerLink]="['/product', item.product.id]" class="cart-item-title">
+                  {{ item.product.title }}
+                </a>
+                <div class="cart-item-desc">{{ item.product.productType }}</div>
+                <div class="cart-item-badges">
+                  <span class="chip chip--gray">{{ item.product.package || 'N/A' }}</span>
+                  <span class="chip" [class.chip--green]="item.product.stockStatus === 'In Stock'"
+                        [class.chip--orange]="item.product.stockStatus !== 'In Stock'">
+                    {{ item.product.stockStatus }}
+                  </span>
+                </div>
+              </td>
+              <td class="cart-table__price">
+                <div>${{ (item.product.price / 84).toFixed(2) }}</div>
+                <div class="price-unit">/ unit</div>
+              </td>
+              <td class="cart-table__qty">
+                <div class="qty-ctrl">
+                  <button (click)="updateQty(item.product.id, item.qty - 1)">−</button>
+                  <span>{{ item.qty }}</span>
+                  <button (click)="updateQty(item.product.id, item.qty + 1)">+</button>
+                </div>
+              </td>
+              <td class="cart-table__ext">
+                ${{ ((item.product.price / 84) * item.qty).toFixed(2) }}
+              </td>
+              <td class="cart-table__remove">
+                <button (click)="remove(item.product.id)" class="btn-remove">✕</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      <div class="cart-actions">
+        <a routerLink="/" class="cart-actions__back">← Continue Shopping</a>
+        <button class="cart-actions__clear" (click)="cart.clear()">🗑 Clear Cart</button>
+        <button class="cart-actions__update">↻ Update Cart</button>
+      </div>
+
+      <!-- Coupon -->
+      <div class="coupon-section">
+        <span class="coupon-icon">🏷</span>
+        <strong>Promo / Coupon Code</strong>
+        <div class="coupon-form">
+          <input type="text" placeholder="Enter code..."
+                 [value]="couponCode()"
+                 (input)="couponCode.set($any($event.target).value)"/>
+          <button (click)="applyCoupon()" class="btn-apply">Apply</button>
+        </div>
+        @if (couponApplied()) {
+          <div class="coupon-applied">✓ Coupon applied!</div>
+        }
+      </div>
+    } @else {
+      <div class="cart-empty">
+        <span>🛒</span>
+        <h2>Your cart is empty</h2>
+        <a routerLink="/" class="btn-primary">Browse Products</a>
+      </div>
+    }
+  </div>
+
+  <!-- Order Summary -->
+  @if (cart.items().length > 0) {
+    <div class="order-summary">
+      <div class="order-summary__header">
+        <span>📋</span> Order Summary
+      </div>
+      <div class="order-summary__body">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>${{ cart.subtotal().toFixed(2) }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span class="free">{{ shipping }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Estimated Tax (8.5%)</span>
+          <span>${{ cart.tax().toFixed(2) }}</span>
+        </div>
+        <div class="summary-row summary-row--total">
+          <span>Estimated Total</span>
+          <span class="total-amount">${{ cart.total().toFixed(2) }}</span>
+        </div>
+
+        <a routerLink="/checkout/shipping" class="btn-checkout">Proceed to Checkout →</a>
+        <button class="btn-quote">📋 Request a Quote</button>
+
+        <div class="trust-list">
+          <div>🔒 Secure checkout — SSL encrypted</div>
+          <div>🚚 Free shipping on orders over $50</div>
+          <div>↩ Returnable items - 18 month warranty</div>
+          <div>💳 Visa, Mastercard, Amex, Wire, Net 30</div>
+        </div>
+      </div>
+
+      <div class="need-help">
+        <strong>🎧 Need Help?</strong>
+        <p>Our sales team can assist with bulk orders, quotes, and product availability.</p>
+        <a href="#">Contact Sales →</a>
+      </div>
+    </div>
+  }
+</div>
+
+<app-footer></app-footer>   

@@ -1,0 +1,154 @@
+<app-header></app-header>
+
+<!-- Hero Banner -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__content">
+      <h1>Next-Generation Solution for<br/>Every Industry</h1>
+      <p>
+        Millennium Semiconductors India Pvt. Ltd. provides a wide range of electronic components,
+        catering to different industries globally. With a legacy of over two decades, Millennium
+        Semiconductors has established itself as a leading electronic components distributor in India.
+        Catering to 5000+ customers from various industries, we have become the go-to name for
+        electronics components.
+      </p>
+      <div class="hero__ctas">
+        <button class="btn btn--primary">Shop Now</button>
+        <a href="#" class="btn btn--ghost">View Datasheet →</a>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__circuit"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stats-bar__inner">
+    <div class="stat">
+      <span class="stat__icon">📦</span>
+      <div><strong>6.8M+</strong><span>Products In Stock</span></div>
+    </div>
+    <div class="stat">
+      <span class="stat__icon">🏭</span>
+      <div><strong>1,200+</strong><span>Manufacturers</span></div>
+    </div>
+    <div class="stat">
+      <span class="stat__icon">🚚</span>
+      <div><strong>Same Day</strong><span>Shipping Available</span></div>
+    </div>
+    <div class="stat">
+      <span class="stat__icon">✅</span>
+      <div><strong>100%</strong><span>Authorized Distributors</span></div>
+    </div>
+    <div class="stat">
+      <span class="stat__icon">🎧</span>
+      <div><strong>24/7</strong><span>Technical Support</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Shop By Category -->
+<section class="section">
+  <div class="container">
+    <div class="section__header">
+      <h2>Shop by Category</h2>
+      <a href="#" class="link-more">View All Categories →</a>
+    </div>
+    <div class="categories-grid">
+      @for (cat of categories; track cat.name) {
+        <div class="category-card">
+          <span class="category-card__icon">{{ cat.icon }}</span>
+          <strong>{{ cat.name }}</strong>
+          <span class="category-card__sub">{{ cat.sub }}</span>
+          <span class="category-card__count">{{ cat.count }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Trending Products -->
+<section class="section section--gray">
+  <div class="container">
+    <div class="section__header">
+      <h2>Trending Products</h2>
+      <a href="#" class="link-more">View All →</a>
+    </div>
+    <div class="products-grid">
+      @for (product of trending(); track product.id) {
+        <div class="product-card">
+          <a [routerLink]="['/product', product.id]" class="product-card__img-link">
+            <div class="product-card__img">
+              <span>🔧</span>
+            </div>
+          </a>
+          <div class="product-card__body">
+            <span class="product-card__mfr">{{ product.manufacturer }}</span>
+            <a [routerLink]="['/product', product.id]" class="product-card__title">{{ product.title }}</a>
+            <span class="product-card__type">{{ product.productType }}</span>
+            <span class="product-card__pkg">{{ product.package }}</span>
+            <div class="product-card__stock">
+              <span class="chip chip--green">{{ product.availability.toLocaleString() }} in stock</span>
+            </div>
+            <div class="product-card__footer">
+              <div>
+                <span class="product-card__price">{{ formatPrice(product) }}</span>
+                <span class="product-card__unit">1-9 pcs</span>
+              </div>
+              <button class="btn-add" (click)="addToCart(product)"
+                      [class.btn-add--done]="addedId() === product.id">
+                @if (addedId() === product.id) { ✓ } @else { + Add }
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Top Manufacturers -->
+<section class="section">
+  <div class="container">
+    <div class="section__header">
+      <h2>Top Manufacturers</h2>
+      <a href="#" class="link-more">All Manufacturers →</a>
+    </div>
+    <div class="manufacturers-grid">
+      @for (mfr of manufacturers; track mfr) {
+        <div class="manufacturer-card">
+          <div class="manufacturer-card__logo">{{ mfr[0] }}</div>
+          <span>{{ mfr }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Value Props -->
+<div class="value-props">
+  <div class="container">
+    <div class="value-props__grid">
+      <div class="value-prop">
+        <span>🚚</span>
+        <div><strong>Free Shipping</strong><small>On orders over $50</small></div>
+      </div>
+      <div class="value-prop">
+        <span>💰</span>
+        <div><strong>Volume Pricing</strong><small>Save up to 40% on bulk orders</small></div>
+      </div>
+      <div class="value-prop">
+        <span>⏰</span>
+        <div><strong>Same Day Ship</strong><small>Order by 3PM, ships today</small></div>
+      </div>
+      <div class="value-prop">
+        <span>✅</span>
+        <div><strong>Authorized Distributor</strong><small>All products 100% genuine</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

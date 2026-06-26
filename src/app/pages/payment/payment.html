@@ -1,0 +1,146 @@
+<app-header></app-header>
+<app-checkout-stepper [activeStep]="3"></app-checkout-stepper>
+
+<div class="checkout-layout">
+  <div class="checkout-main">
+    <h1 class="page-title">Payment Method</h1>
+
+    <!-- Payment Method Selector -->
+    <div class="payment-methods">
+      @for (method of paymentMethods; track method.id) {
+        <div class="payment-method-tab" [class.active]="activePayment() === method.id"
+             (click)="activePayment.set(method.id)">
+          <div class="pmt-icon">{{ method.icon }}</div>
+          <div class="pmt-label">{{ method.label }}</div>
+          <div class="pmt-radio">
+            <input type="radio" [checked]="activePayment() === method.id"/>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Credit Card Form -->
+    @if (activePayment() === 'credit') {
+      <div class="checkout-card">
+        <div class="checkout-card__header">
+          <span>💳 Card Details</span>
+          <div class="card-icons">
+            <span class="card-badge">VISA</span>
+            <span class="card-badge">MC</span>
+            <span class="card-badge">AMEX</span>
+            <span class="card-badge">DISC</span>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group form-group--full">
+            <label>Cardholder Name *</label>
+            <input type="text" placeholder="Robert Chen" value="Robert Chen"/>
+          </div>
+          <div class="form-group form-group--full">
+            <label>Card Number *</label>
+            <div class="card-number-input">
+              <input type="text" placeholder="•••• •••• •••• ••••" value="•••• •••• •••• 4242"/>
+              <span class="card-number-icon">💳</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Expiry Date *</label>
+            <input type="text" placeholder="MM / YY" value="09 / 27"/>
+          </div>
+          <div class="form-group">
+            <label>CVV / Security Code *</label>
+            <div class="card-number-input">
+              <input type="password" placeholder="•••" value="..."/>
+              <span class="card-number-icon">🔒</span>
+            </div>
+          </div>
+          <div class="form-group form-group--full">
+            <label class="checkbox-label">
+              <input type="checkbox" checked/>
+              Save this card for future orders
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Billing Address -->
+      <div class="checkout-card">
+        <div class="checkout-card__header"><span>📍 Billing Address</span></div>
+        <div class="billing-section">
+          <label class="checkbox-label billing-same">
+            <input type="checkbox" [checked]="sameAsShipping()"
+                   (change)="sameAsShipping.set(!sameAsShipping())"/>
+            Same as shipping address
+          </label>
+          @if (sameAsShipping()) {
+            <div class="billing-addr">
+              <span>📍</span>
+              <div>
+                <strong>Robert Chen — Acme Electronics Inc.</strong>
+                <span>450 Serra Mall, Bldg 500</span>
+                <span>Stanford, CA 94305</span>
+                <span>United States</span>
+                <a href="#">Change</a>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (activePayment() === 'wire') {
+      <div class="checkout-card">
+        <div class="checkout-card__header"><span>🏦 Wire Transfer Details</span></div>
+        <div class="info-box">
+          <p>Wire transfer instructions will be sent to your registered email after order placement.
+            Payment must be received within <strong>5 business days</strong>.</p>
+          <p>For assistance, contact <a href="#">sales&#64;millenniumsemi.com</a></p>
+        </div>
+      </div>
+    }
+
+    @if (activePayment() === 'net30') {
+      <div class="checkout-card">
+        <div class="checkout-card__header"><span>📄 Net 30 Terms</span></div>
+        <div class="info-box">
+          <p>Net 30 terms are available for pre-approved accounts. An invoice will be generated
+            and payment is due within <strong>30 days</strong> of shipment.</p>
+        </div>
+      </div>
+    }
+
+    <div class="checkout-nav">
+      <a routerLink="/checkout/shipping" class="btn-back">← Back to Shipping</a>
+      <button class="btn-continue" (click)="reviewOrder()">Review Order →</button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="order-sidebar">
+    <div class="checkout-card">
+      <div class="checkout-card__header"><span>📋 Order Summary</span></div>
+      <div class="sidebar-items">
+        @for (item of cart.items(); track item.product.id) {
+          <div class="sidebar-item">
+            <span class="sidebar-item__name">{{ item.product.title }}</span>
+            <span class="sidebar-item__qty">× {{ item.qty }}</span>
+            <span class="sidebar-item__price">${{ ((item.product.price/84)*item.qty).toFixed(2) }}</span>
+          </div>
+        }
+        <div class="sidebar-ship-to">
+          <span>🚚 Ship to</span>
+          <span>Robert Chen, Acme Electronics, 450 Serra Mall — Stanford CA 94305</span>
+          <span class="free">Standard — FREE</span>
+        </div>
+      </div>
+      <div class="sidebar-totals">
+        <div class="summary-row"><span>Subtotal</span><span>${{ cart.subtotal().toFixed(2) }}</span></div>
+        <div class="summary-row"><span>Shipping</span><span class="free">FREE</span></div>
+        <div class="summary-row"><span>Tax (8.5%)</span><span>${{ cart.tax().toFixed(2) }}</span></div>
+        <div class="summary-row summary-row--total"><span>Total</span><span class="total">${{ cart.total().toFixed(2) }}</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
