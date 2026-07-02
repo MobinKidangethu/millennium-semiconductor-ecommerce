@@ -5,6 +5,39 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+// ─── App color themes ───────────────────────────────────────────────────────
+// Toggled at runtime via [data-theme] on <html> (see ThemeService).
+:root,
+html[data-theme='maroon'] {
+  --color-primary: #70284e;
+  --color-primary-dark: #4a1a34;
+  --color-primary-light: #8f4068;
+  --color-primary-rgb: 112, 40, 78;
+
+  --color-secondary: #caa43c;
+  --color-secondary-dark: #a8842e;
+
+  --color-hero-1: #241019;
+  --color-hero-3: #3a1226;
+  --color-circuit-rgb: 210, 170, 80;
+  --color-circuit-text-rgb: 230, 195, 110;
+}
+
+html[data-theme='blue'] {
+  --color-primary: #1a3a6b;
+  --color-primary-dark: #0f2550;
+  --color-primary-light: #2a5aab;
+  --color-primary-rgb: 26, 58, 107;
+
+  --color-secondary: #e85d26;
+  --color-secondary-dark: #c94e1e;
+
+  --color-hero-1: #0a1628;
+  --color-hero-3: #0d2040;
+  --color-circuit-rgb: 100, 160, 220;
+  --color-circuit-text-rgb: 100, 180, 255;
+}
+
 html {
   height: 100%;
   @include mat.theme(
@@ -37,3 +70,296 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+
+// ─── Shared icon sizing (Millennium icon set) ──────────────────────────────────
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-inline {
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+  margin-right: 4px;
+}
+
+// ─── Auth pages (login / register / forgot / reset password) ──────────────────
+.auth-wrap {
+  min-height: calc(100vh - 400px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  background: #f5f7fa;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  border: 1px solid #e0e6ee;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  padding: 32px 32px 28px;
+}
+
+.auth-card__logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+
+  img { height: 40px; }
+}
+
+.auth-card__title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a2e;
+  text-align: center;
+  margin: 0 0 6px;
+}
+
+.auth-card__subtitle {
+  font-size: 13px;
+  color: #777;
+  text-align: center;
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  input {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 12px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    font-family: inherit;
+
+    &:focus { border-color: var(--color-primary); }
+  }
+
+  &__hint { font-size: 11px; color: #999; }
+}
+
+.auth-row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+
+  a { color: var(--color-primary); text-decoration: none; font-weight: 600; &:hover { text-decoration: underline; } }
+}
+
+.auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+.auth-btn-primary {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 11px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover { background: var(--color-primary-dark); }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #999;
+  font-size: 11px;
+  margin: 18px 0;
+
+  &::before, &::after { content: ''; flex: 1; height: 1px; background: #e5e5e5; }
+}
+
+.auth-btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+
+  &:hover { background: #f8f8f8; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+.auth-google-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.auth-footer-note {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-top: 22px;
+
+  a { color: var(--color-primary); text-decoration: none; font-weight: 700; &:hover { text-decoration: underline; } }
+}
+
+.auth-error {
+  background: #fdecec;
+  border: 1px solid #f5c6c6;
+  color: #b42318;
+  font-size: 12px;
+  padding: 9px 12px;
+  border-radius: 5px;
+}
+
+.auth-success {
+  background: #eaf7ee;
+  border: 1px solid #b9e4c5;
+  color: #1a8040;
+  font-size: 12px;
+  padding: 9px 12px;
+  border-radius: 5px;
+  line-height: 1.5;
+}
+
+.auth-demo-note {
+  background: #fff8e6;
+  border: 1px solid #f0dfa8;
+  color: #7a5c00;
+  font-size: 11px;
+  padding: 8px 10px;
+  border-radius: 5px;
+  line-height: 1.5;
+}
+
+.auth-demo-link {
+  display: block;
+  word-break: break-all;
+  margin-top: 6px;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+// Simple dummy "choose an account" panel used by the mock Google sign-in.
+.auth-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.auth-modal {
+  width: 340px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  padding: 24px;
+  text-align: center;
+}
+
+.auth-modal__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 8px 0 4px;
+}
+
+.auth-modal__subtitle {
+  font-size: 12px;
+  color: #777;
+  margin: 0 0 18px;
+}
+
+.auth-modal__account {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e0e6ee;
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
+  text-align: left;
+  background: white;
+  width: 100%;
+  transition: background 0.15s;
+
+  &:hover { background: #f5f7fa; }
+}
+
+.auth-modal__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.auth-modal__spinner {
+  margin: 20px auto;
+  width: 28px;
+  height: 28px;
+  border: 3px solid #eee;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: auth-spin 0.7s linear infinite;
+}
+
+@keyframes auth-spin {
+  to { transform: rotate(360deg); }
+}
+
+.auth-modal__cancel {
+  margin-top: 14px;
+  background: none;
+  border: none;
+  color: #777;
+  font-size: 12px;
+  cursor: pointer;
+  &:hover { color: #333; }
+}

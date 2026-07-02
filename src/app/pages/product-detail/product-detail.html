@@ -5,108 +5,183 @@
 
   <!-- Breadcrumb -->
   <nav class="breadcrumb">
-    <a routerLink="/">Home</a> › <a href="#">Semiconductors</a> › <span>{{ p.title }}</span>
+    <a routerLink="/">Home</a>
+    <span class="breadcrumb__sep">›</span>
+    <a routerLink="/products">Semiconductors</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>{{ p.manufacturerPartNumber }}</span>
   </nav>
 
-  <!-- Product Main -->
+  <!-- ── Product Top Section ──────────────────────────────────────────────── -->
   <div class="product-layout">
-    <!-- Left: Images -->
-    <div class="product-images">
-      <div class="product-images__main">
-        <span class="product-images__placeholder">🔧</span>
+
+    <!-- Col 1: Main Image Viewer -->
+    <div class="product-viewer">
+      <div class="product-viewer__stage" (click)="openLightbox()" role="button" tabindex="0" (keyup.enter)="openLightbox()">
+        <img width="220" height="220" [src]="p.image" [alt]="p.title" (error)="onImgError($event, p.category)" />
+        <span class="product-viewer__zoom-hint">⊕ Click to zoom</span>
       </div>
-      <div class="product-images__thumbs">
-        @for (i of [0, 1, 2, 3]; track i) {
-          <div class="product-images__thumb" [class.active]="activeImage() === i"
-               (click)="activeImage.set(i)">🔧</div>
-        }
+      <div class="product-viewer__footer">
+        <span class="product-viewer__counter">{{ p.category }}</span>
       </div>
     </div>
 
-    <!-- Middle: Info -->
+    <!-- Col 2: Info + Purchase ─────────────────────────────────────────── -->
     <div class="product-info">
-      <div class="product-info__badges">
-        @if (p.rohs) {
-          <span class="badge badge--green">✓ RoHS</span>
-        }
-        <span class="badge badge--blue">{{ p.lifecycle }}</span>
-      </div>
 
-      <div class="product-info__mfr">{{ p.manufacturer }}</div>
-      <h1 class="product-info__title">{{ p.title }}</h1>
-      <p class="product-info__desc">{{ p.description }}</p>
-
-      <div class="product-info__meta">
-        <div class="meta-row">
-          <span>Mouser #:</span><strong>{{ p.mouserPartNumber }}</strong>
-        </div>
-        <div class="meta-row">
-          <span>Mfr. #:</span><strong>{{ p.manufacturerPartNumber }}</strong>
-        </div>
-        <div class="meta-row">
-          <span>Package:</span><strong>{{ p.package || 'N/A' }}</strong>
-        </div>
-      </div>
-
-      <div class="product-info__stock" [class.in-stock]="p.stockStatus === 'In Stock'">
-        <span>●</span> {{ p.stockStatus }} — {{ p.availability.toLocaleString() }} units
-      </div>
-
-      <a [href]="p.datasheet" target="_blank" class="datasheet-link">📄 Download Datasheet</a>
-    </div>
-
-    <!-- Right: Pricing / Add to Cart -->
-    <div class="product-purchase">
-      <div class="product-purchase__price">{{ usdPrice }}</div>
-      <div class="product-purchase__unit">/ unit (1-9 pcs)</div>
-
-      <!-- Price breaks table -->
-      <table class="price-table">
-        <thead>
-          <tr><th>Qty</th><th>Unit Price</th></tr>
-        </thead>
-        <tbody>
-          @for (pb of priceBreaks; track pb.qty) {
-            <tr>
-              <td>{{ pb.qty }}</td>
-              <td>${{ pb.price }}</td>
-            </tr>
+      <!-- Tags + Save/Share -->
+      <div class="product-info__toprow">
+        <div class="product-tags">
+          <span class="tag tag--mfr">
+            @if (manufacturerLogo(p.manufacturer); as logo) {
+              <img class="tag--mfr__logo" [class.tag--mfr__logo--dark]="manufacturerLogoDark(p.manufacturer)"
+                   [src]="logo" [alt]="p.manufacturer" />
+            }
+            {{ p.manufacturer }}
+          </span>
+          <span class="tag tag--lifecycle">{{ p.lifecycle }}</span>
+          @if (p.rohs) {
+            <span class="tag tag--rohs">RoHS</span>
           }
-        </tbody>
-      </table>
-
-      <div class="qty-control">
-        <button (click)="changeQty(-1)">−</button>
-        <span>{{ quantity() }}</span>
-        <button (click)="changeQty(1)">+</button>
+        </div>
+        <div class="product-info__actions">
+          <button class="action-btn">♡ Save</button>
+          <button class="action-btn">⤴ Share</button>
+        </div>
       </div>
 
-      <button class="btn-cart" (click)="addToCart()" [class.btn-cart--added]="added()">
-        @if (added()) { ✓ Added to Cart } @else { 🛒 Add to Cart }
-      </button>
+      <!-- Part Number as title -->
+      <h1 class="product-title">{{ p.manufacturerPartNumber }}</h1>
+      <p class="product-subtitle">{{ p.title }}</p>
 
+      <!-- Meta line -->
+      <div class="product-meta">
+        <span>MPN: <a class="product-meta__link">{{ p.manufacturerPartNumber }}</a></span>
+        <span class="product-meta__divider">|</span>
+        <span>Mouser#: {{ p.mouserPartNumber }}</span>
+        <span class="product-meta__divider">|</span>
+        <span>Package: <strong>{{ p.package || 'N/A' }}</strong></span>
+      </div>
+
+      <!-- Stock banner -->
+      <div class="stock-banner" [class.stock-banner--in]="p.availability > 0">
+        <span class="stock-banner__icon">ℹ</span>
+        <span>
+          @if (p.availability > 0) {
+            <strong>In Stock</strong> — {{ p.availability.toLocaleString() }} units available
+          } @else {
+            <strong>{{ p.stockStatus }}</strong> — Lead time 4–6 weeks. Request quote for volume.
+          }
+        </span>
+      </div>
+
+      <!-- Hero price — updates when tier is clicked -->
+      <div class="product-price">{{ displayedPrice }}</div>
+      <div class="product-price__sub">{{ displayedPriceQtyLabel }}</div>
+
+      <!-- ── Volume Pricing Tabs ──────────────────────────────────────── -->
+      <p class="volume-label">Volume Pricing</p>
+      <div class="volume-bar">
+        @for (pb of priceBreaks; track pb.qty; let i = $index) {
+          <button
+            class="volume-bar__cell"
+            [class.volume-bar__cell--active]="activeTier() === i"
+            (click)="selectTier(i)"
+            type="button"
+          >
+            <div class="volume-bar__price">{{ formatINR(pb.price) }}</div>
+            <div class="volume-bar__qty">{{ pb.qty }}</div>
+          </button>
+        }
+      </div>
+
+      <!-- Qty + Add to Cart -->
+      <div class="purchase-row">
+        <div class="qty-control">
+          <button (click)="changeQty(-1)" [disabled]="quantity() <= 1">−</button>
+          <input
+            type="number"
+            class="qty-input"
+            [value]="quantity()"
+            (change)="setQty($any($event.target).value)"
+            min="1"
+          />
+          <button (click)="changeQty(1)">+</button>
+        </div>
+        <button class="btn-cart" (click)="addToCart()" [class.btn-cart--added]="added()">
+          @if (added()) { ✓ Added to Cart } @else { <img class="icon-inline" src="assets/icons/shopping-cart-white.svg" alt="" /> Add to Cart }
+        </button>
+      </div>
+
+      <!-- Extended price hint -->
+      @if (quantity() > 1) {
+        <div class="extended-price-hint">
+          {{ quantity() }} pcs × {{ formatINR(priceBreaks[activeTier()]?.price || 0) }} = <strong>{{ extendedPrice }}</strong>
+        </div>
+      }
+
+      <!-- Request a Quote -->
       <a routerLink="/cart" class="btn-quote">📋 Request a Quote</a>
 
-      <div class="trust-badges">
-        <span>🔒 Secure Checkout</span>
-        <span>🚚 Free shipping over $50</span>
-        <span>↩ 18-month warranty</span>
+      <!-- Trust badges -->
+      <div class="trust-row">
+        <span class="trust-item">
+          <img class="icon-inline" [src]="icon('authorized-distributor')" alt="" />
+          Authorized Distributor
+        </span>
+        <span class="trust-item">↩ Returnable · 18 mo warranty</span>
+        <span class="trust-item">
+          <img class="icon-inline" [src]="icon('shipping-available')" alt="" />
+          Free shipping on orders over ₹4,175
+        </span>
+      </div>
+
+    </div><!-- /product-info -->
+  </div><!-- /product-layout -->
+
+  <!-- ── Image Lightbox with Magnifier ─────────────────────────────────────── -->
+  @if (lightboxOpen()) {
+    <div class="lightbox" (click)="closeLightbox()">
+      <button class="lightbox__close" (click)="closeLightbox()" aria-label="Close">✕</button>
+      <div class="lightbox__panel" (click)="$event.stopPropagation()">
+        <div class="magnifier"
+             #magnifierBox
+             (mousemove)="onMagnifierMove($event, magnifierBox)"
+             (mouseenter)="magnifierActive.set(true)"
+             (mouseleave)="magnifierActive.set(false)">
+          <img [src]="p.image" [alt]="p.title" (error)="onImgError($event, p.category)" />
+          @if (magnifierActive()) {
+            <div class="magnifier__lens"
+                 [style.left.px]="lensPos().x"
+                 [style.top.px]="lensPos().y"
+                 [style.backgroundImage]="'url(' + p.image + ')'"
+                 [style.backgroundPosition]="lensBgPos()"
+                 [style.backgroundSize]="lensBgSize()">
+            </div>
+          }
+        </div>
+        <p class="lightbox__hint">Move your cursor over the image to magnify</p>
       </div>
     </div>
-  </div>
+  }
 
-  <!-- Tabs -->
+  <!-- ── Tabs ─────────────────────────────────────────────────────────────── -->
   <div class="tabs">
     <div class="tabs__nav">
-      @for (tab of ['specs', 'documents', 'related'] ; track tab) {
+      @for (tab of ['specs', 'dimensions', 'documents', 'related']; track tab) {
         <button class="tabs__btn" [class.active]="activeTab() === tab"
                 (click)="activeTab.set(tab)">
-          {{ tab === 'specs' ? 'Specifications' : tab === 'documents' ? 'Documents & Wiring' : 'Related Parts' }}
+          {{ tab === 'specs'      ? 'Specifications'
+           : tab === 'dimensions' ? 'Dimensions & Wiring'
+           : tab === 'documents'  ? 'Documents'
+           :                       'Related Parts' }}
         </button>
       }
     </div>
 
     <div class="tabs__content">
+
+      <!-- Specifications -->
       @if (activeTab() === 'specs') {
         <div class="spec-section">
           <div class="spec-section__header">Main Specifications</div>
@@ -114,38 +189,101 @@
             <div class="spec-row"><span>Product Category</span><span>{{ p.category }}</span></div>
             <div class="spec-row"><span>Product Type</span><span>{{ p.productType }}</span></div>
             <div class="spec-row"><span>Manufacturer</span><span>{{ p.manufacturer }}</span></div>
-            <div class="spec-row"><span>Technology</span><span>{{ p.technology }}</span></div>
+            <div class="spec-row"><span>Technology</span><span>{{ p.technology || 'N/A' }}</span></div>
             <div class="spec-row"><span>Mounting Style</span><span>{{ p.mountingStyle }}</span></div>
-            <div class="spec-row"><span>Package</span><span>{{ p.package || 'N/A' }}</span></div>
+            <div class="spec-row"><span>Package / Case</span><span>{{ p.package || 'N/A' }}</span></div>
             <div class="spec-row"><span>Stock Type</span><span>{{ p.stockType }}</span></div>
             <div class="spec-row"><span>Lifecycle</span><span>{{ p.lifecycle }}</span></div>
             <div class="spec-row"><span>RoHS Status</span><span>{{ p.rohsLabel }}</span></div>
+            <div class="spec-row"><span>Availability</span><span>{{ p.availability.toLocaleString() }} units</span></div>
+            <div class="spec-row"><span>Currency</span><span>{{ p.currency }}</span></div>
+            <div class="spec-row"><span>Base Price</span><span>{{ formatINR(p.price) }}</span></div>
+          </div>
+        </div>
+
+        <div class="spec-section">
+          <div class="spec-section__header">Compliance Properties</div>
+          <div class="spec-grid">
+            <div class="spec-row"><span>RoHS</span><span>{{ p.rohsLabel }}</span></div>
+            <div class="spec-row"><span>REACH Status</span><span>SVHC Not Contained</span></div>
+            <div class="spec-row"><span>ECCN</span><span>EAR99</span></div>
           </div>
         </div>
       }
 
-      @if (activeTab() === 'documents') {
+      <!-- Dimensions -->
+      @if (activeTab() === 'dimensions') {
         <div class="empty-tab">
-          <p>📄 <a [href]="p.datasheet" target="_blank">Download Datasheet (PDF)</a></p>
+          <div class="empty-tab__icon">📐</div>
+          <p>No dimension data available for this product.</p>
+          @if (p.datasheet) {
+            <a [href]="p.datasheet" target="_blank" class="datasheet-link">
+              📄 View Datasheet for dimensions
+            </a>
+          }
         </div>
       }
 
-      @if (activeTab() === 'related') {
-        <div class="related-products">
-          @for (rp of related(); track rp.id) {
-            <div class="related-card">
-              <a [routerLink]="['/product', rp.id]">{{ rp.title }}</a>
-              <span>{{ rp.manufacturer }}</span>
-              <span>${{ (rp.price/84).toFixed(2) }}</span>
+      <!-- Documents -->
+      @if (activeTab() === 'documents') {
+        <div class="docs-list">
+          @if (p.datasheet) {
+            <a [href]="p.datasheet" target="_blank" class="doc-item">
+              <span class="doc-item__icon">📄</span>
+              <div class="doc-item__body">
+                <strong>Datasheet</strong>
+                <span>{{ p.manufacturerPartNumber }} — PDF</span>
+              </div>
+              <span class="doc-item__dl">⬇ Download</span>
+            </a>
+          } @else {
+            <div class="empty-tab">
+              <div class="empty-tab__icon">📁</div>
+              <p>No documents available for this product.</p>
             </div>
           }
         </div>
       }
+
+      <!-- Related Parts -->
+      @if (activeTab() === 'related') {
+        <div class="related-header">
+          <h3>Similar Products</h3>
+          <a routerLink="/products">See More ›</a>
+        </div>
+        <div class="related-grid">
+          @for (rp of related(); track rp.id) {
+            <div class="related-card" [routerLink]="['/product', rp.id]">
+              <div class="related-card__img">
+                <img width="32" height="32" [src]="categoryIcon(rp.category)" alt="" />
+              </div>
+              <div class="related-card__body">
+                <div class="related-card__mfr">{{ rp.manufacturer }}</div>
+                <a class="related-card__name" [routerLink]="['/product', rp.id]">
+                  {{ rp.manufacturerPartNumber }}
+                </a>
+                <div class="related-card__type">{{ rp.productType || rp.category }}</div>
+              </div>
+              <div class="related-card__footer">
+                <span class="related-card__price">{{ formatINR(rp.price) }}</span>
+                @if (rp.availability > 0) {
+                  <span class="related-card__stock">● In Stock</span>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+
     </div>
   </div>
+
 </div>
 } @else {
-  <div class="loading">Loading product...</div>
+  <div class="loading">
+    <div class="loading__spinner">⟳</div>
+    Loading product...
+  </div>
 }
 
 <app-footer></app-footer>

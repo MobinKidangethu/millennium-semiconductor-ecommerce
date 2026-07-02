@@ -6,6 +6,7 @@ import { CheckoutService } from '../../core/services/checkout.service';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
 import { CheckoutStepper } from '../../shared/checkout-stepper/checkout-stepper';
+import { inr } from '../../core/utils/price.utils';
 
 @Component({
   selector: 'app-payment',
@@ -24,13 +25,15 @@ export class Payment {
 
   paymentMethods = [
     { id: 'credit', label: 'Credit / Debit Card', icon: '💳' },
-    { id: 'wire', label: 'Wire Transfer', icon: '🏦' },
-    { id: 'net30', label: 'Net 30 (Account Required)', icon: '📄' },
-    { id: 'po', label: 'Purchase Order', icon: '📋' }
+    { id: 'wire',   label: 'Wire Transfer',        icon: '🏦' },
+    { id: 'net30',  label: 'Net 30 (Account Required)', icon: '📄' },
+    { id: 'po',     label: 'Purchase Order',        icon: '📋' }
   ];
 
   reviewOrder() {
     this.checkout.paymentMethod.set(this.activePayment());
     this.router.navigate(['/checkout/review']);
   }
+
+  formatINR(amount: number): string { return inr(amount); }
 }

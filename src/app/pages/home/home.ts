@@ -6,6 +6,11 @@ import { CartService } from '../../core/services/cart.service';
 import { Product } from '../../core/models/product.model';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
+import { inr } from '../../core/utils/price.utils';
+import { categoryIconPath, iconPath } from '../../core/utils/icon.utils';
+import { pooledProductImage } from '../../core/utils/product-image.utils';
+import { manufacturerLogoPath, manufacturerLogoIsDark } from '../../core/utils/manufacturer.utils';
+import { ThemeService } from '../../core/services/theme.service';
 
 const CATEGORIES = [
   { name: 'Semiconductors', icon: '💻', sub: 'ICs, Transistors, Diodes', count: '1.2M parts' },
@@ -37,6 +42,7 @@ const MANUFACTURERS = [
 export class Home implements OnInit {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
+  private theme = inject(ThemeService);
 
   trending = signal<Product[]>([]);
   categories = CATEGORIES;
@@ -54,6 +60,30 @@ export class Home implements OnInit {
   }
 
   formatPrice(p: Product): string {
-    return `$${(p.price / 84).toFixed(2)}`;
+    return inr(p.price);
+  }
+
+  categoryIcon(category: string): string {
+    return categoryIconPath(category, this.theme.theme());
+  }
+
+  trendingImage(index: number): string {
+    return pooledProductImage(index);
+  }
+
+  onImgError(event: Event, category: string) {
+    (event.target as HTMLImageElement).src = this.categoryIcon(category);
+  }
+
+  icon(name: string): string {
+    return iconPath(name, this.theme.theme());
+  }
+
+  manufacturerLogo(name: string): string | null {
+    return manufacturerLogoPath(name);
+  }
+
+  manufacturerLogoDark(name: string): boolean {
+    return manufacturerLogoIsDark(name);
   }
 }

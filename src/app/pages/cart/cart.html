@@ -23,35 +23,44 @@
           @for (item of cart.items(); track item.product.id) {
             <tr>
               <td class="cart-table__img-cell">
-                <div class="cart-item-img">🔧</div>
+                <div class="cart-item-img">
+                  <img width="28" height="28" [src]="categoryIcon(item.product.category)" alt="" />
+                </div>
               </td>
               <td class="cart-table__product">
                 <div class="cart-item-mfr">{{ item.product.manufacturer }}</div>
                 <a [routerLink]="['/product', item.product.id]" class="cart-item-title">
-                  {{ item.product.title }}
+                  {{ item.product.manufacturerPartNumber }}
                 </a>
+                <div class="cart-item-desc">{{ item.product.title }}</div>
                 <div class="cart-item-desc">{{ item.product.productType }}</div>
                 <div class="cart-item-badges">
                   <span class="chip chip--gray">{{ item.product.package || 'N/A' }}</span>
-                  <span class="chip" [class.chip--green]="item.product.stockStatus === 'In Stock'"
-                        [class.chip--orange]="item.product.stockStatus !== 'In Stock'">
-                    {{ item.product.stockStatus }}
+                  <span class="chip" [class.chip--green]="item.product.availability > 0"
+                        [class.chip--orange]="item.product.availability === 0">
+                    {{ item.product.availability > 0 ? 'In Stock' : item.product.stockStatus }}
                   </span>
                 </div>
               </td>
               <td class="cart-table__price">
-                <div>${{ (item.product.price / 84).toFixed(2) }}</div>
+                <div>{{ formatINR(item.product.price) }}</div>
                 <div class="price-unit">/ unit</div>
               </td>
               <td class="cart-table__qty">
                 <div class="qty-ctrl">
                   <button (click)="updateQty(item.product.id, item.qty - 1)">−</button>
-                  <span>{{ item.qty }}</span>
+                  <input
+                    type="text"
+                    inputmode="numeric"
+                    class="qty-ctrl__input"
+                    [value]="item.qty"
+                    (change)="onQtyInput(item.product.id, $event)"
+                  />
                   <button (click)="updateQty(item.product.id, item.qty + 1)">+</button>
                 </div>
               </td>
               <td class="cart-table__ext">
-                ${{ ((item.product.price / 84) * item.qty).toFixed(2) }}
+                {{ formatINR(item.product.price * item.qty) }}
               </td>
               <td class="cart-table__remove">
                 <button (click)="remove(item.product.id)" class="btn-remove">✕</button>
@@ -81,11 +90,43 @@
           <div class="coupon-applied">✓ Coupon applied!</div>
         }
       </div>
+
+      <!-- Invoice Type section -->
+      <div class="invoice-section">
+        <div class="invoice-section__header">📄 Invoice Type</div>
+        <p class="invoice-section__desc">Please choose how you would like to order from Millennium Semiconductors</p>
+
+        @if (!invoiceEditing()) {
+          <div class="invoice-summary">
+            <span>Invoice Type: <strong>{{ currentInvoiceLabel }}</strong></span>
+            <button class="btn-change" (click)="invoiceEditing.set(true)">Change</button>
+          </div>
+        } @else {
+          <p class="invoice-section__see-more">See more about invoice types:</p>
+          <div class="invoice-options">
+            @for (option of invoiceOptions; track option.id) {
+              <label class="invoice-option"
+                     [class.invoice-option--selected]="checkout.invoiceType() === option.id">
+                <input type="radio" name="invoiceType"
+                       [checked]="checkout.invoiceType() === option.id"
+                       (change)="selectInvoiceType(option.id)" />
+                <strong>{{ option.label }}</strong>
+                <ul>
+                  @for (bullet of option.bullets; track bullet) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+              </label>
+            }
+          </div>
+        }
+      </div>
+
     } @else {
       <div class="cart-empty">
-        <span>🛒</span>
+        <img width="60" height="60" [src]="icon('shopping-cart')" alt="" />
         <h2>Your cart is empty</h2>
-        <a routerLink="/" class="btn-primary">Browse Products</a>
+        <a routerLink="/products" class="btn-primary">Browse Products</a>
       </div>
     }
   </div>
@@ -99,19 +140,19 @@
       <div class="order-summary__body">
         <div class="summary-row">
           <span>Subtotal</span>
-          <span>${{ cart.subtotal().toFixed(2) }}</span>
+          <span>{{ formatINR(cart.subtotal()) }}</span>
         </div>
         <div class="summary-row">
           <span>Shipping</span>
           <span class="free">{{ shipping }}</span>
         </div>
         <div class="summary-row">
-          <span>Estimated Tax (8.5%)</span>
-          <span>${{ cart.tax().toFixed(2) }}</span>
+          <span>Estimated GST (18%)</span>
+          <span>{{ formatINR(cart.tax()) }}</span>
         </div>
         <div class="summary-row summary-row--total">
           <span>Estimated Total</span>
-          <span class="total-amount">${{ cart.total().toFixed(2) }}</span>
+          <span class="total-amount">{{ formatINR(cart.total()) }}</span>
         </div>
 
         <a routerLink="/checkout/shipping" class="btn-checkout">Proceed to Checkout →</a>
@@ -119,7 +160,7 @@
 
         <div class="trust-list">
           <div>🔒 Secure checkout — SSL encrypted</div>
-          <div>🚚 Free shipping on orders over $50</div>
+          <div>🚚 Free shipping on orders over ₹4,175</div>
           <div>↩ Returnable items - 18 month warranty</div>
           <div>💳 Visa, Mastercard, Amex, Wire, Net 30</div>
         </div>
@@ -134,4 +175,4 @@
   }
 </div>
 
-<app-footer></app-footer>   
+<app-footer></app-footer>

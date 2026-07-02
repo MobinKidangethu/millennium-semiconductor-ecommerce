@@ -1,0 +1,439 @@
+<app-header></app-header>
+
+<div class="page-wrap">
+  <div class="page-container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a routerLink="/">Home</a>
+      <span class="breadcrumb__sep">›</span>
+      <span>{{ pageTitle }}</span>
+    </nav>
+
+    <!-- Page title + toolbar row -->
+    <div class="listing-header">
+      <div class="listing-header__left">
+        <h1 class="listing-title">{{ pageTitle }}</h1>
+        <span class="listing-count">
+          @if (filteredProducts.length > 0) {
+            Showing {{ showingFrom }}–{{ showingTo }} of {{ filteredProducts.length }} products
+          } @else {
+            0 products found
+          }
+        </span>
+      </div>
+      <div class="listing-header__right">
+        <div class="toolbar">
+          <div class="toolbar__sort">
+            <label>Sort by:</label>
+            <select [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event); onSortChange()">
+              <option value="relevance">Relevance</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="availability">Availability</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </div>
+          <div class="toolbar__view">
+            <button class="view-btn" [class.view-btn--active]="viewMode() === 'grid'"
+                    (click)="viewMode.set('grid')" title="Grid view">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                <path d="M2.25 6.75H15.75M2.25 11.25H15.75M6.75 2.25V15.75M11.25 2.25V15.75M3.75 2.25H14.25C15.0784 2.25 15.75 2.92157 15.75 3.75V14.25C15.75 15.0784 15.0784 15.75 14.25 15.75H3.75C2.92157 15.75 2.25 15.0784 2.25 14.25V3.75C2.25 2.92157 2.92157 2.25 3.75 2.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button class="view-btn" [class.view-btn--active]="viewMode() === 'list'"
+                    (click)="viewMode.set('list')" title="List view">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                <path d="M2.25 3.7494H2.2575M2.25 9H2.2575M2.25 14.2506H2.2575M6 3.7494H15.75M6 9H15.75M6 14.2506H15.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active filter chips -->
+    @if (activeFilterCount > 0) {
+      <div class="active-filters">
+        <span class="active-filters__label">Active Filters:</span>
+        @for (mfr of manufacturers; track mfr) {
+          @if (selectedManufacturers().has(mfr)) {
+            <button class="filter-chip" (click)="toggleManufacturer(mfr)">
+              {{ mfr }} <span>✕</span>
+            </button>
+          }
+        }
+        @for (type of productTypes; track type) {
+          @if (selectedProductTypes().has(type)) {
+            <button class="filter-chip" (click)="toggleProductType(type)">
+              {{ type }} <span>✕</span>
+            </button>
+          }
+        }
+        @for (style of mountingStyles; track style) {
+          @if (selectedMountingStyles().has(style)) {
+            <button class="filter-chip" (click)="toggleMountingStyle(style)">
+              {{ style }} <span>✕</span>
+            </button>
+          }
+        }
+        @if (inStockOnly()) {
+          <button class="filter-chip" (click)="inStockOnly.set(false)">
+            In Stock Only <span>✕</span>
+          </button>
+        }
+        @if (rohsOnly()) {
+          <button class="filter-chip" (click)="rohsOnly.set(false)">
+            RoHS Only <span>✕</span>
+          </button>
+        }
+        <button class="filter-chip filter-chip--clear" (click)="clearAllFilters()">
+          Clear All
+        </button>
+      </div>
+    }
+
+    <!-- Main layout: sidebar + results -->
+    <div class="listing-layout">
+
+      <!-- ── FILTER SIDEBAR ──────────────────────────────────────────────── -->
+      <aside class="sidebar">
+        <div class="sidebar__header">
+          <h3>Filter By</h3>
+          @if (activeFilterCount > 0) {
+            <button class="sidebar__clear" (click)="clearAllFilters()">Clear All</button>
+          }
+        </div>
+
+        <!-- Availability -->
+        <div class="filter-section">
+          <div class="filter-section__head" (click)="toggleSection('stock')">
+            <span>Availability</span>
+            <span class="caret" [class.caret--up]="!isSectionCollapsed('stock')">›</span>
+          </div>
+          @if (!isSectionCollapsed('stock')) {
+            <div class="filter-section__body">
+              <label class="filter-checkbox">
+                <input type="checkbox" [checked]="inStockOnly()" (change)="inStockOnly.set(!inStockOnly()); currentPage.set(1)" />
+                <span class="checkmark"></span>
+                <span class="filter-checkbox__label">In Stock Only</span>
+              </label>
+            </div>
+          }
+        </div>
+
+        <!-- Manufacturer -->
+        <div class="filter-section">
+          <div class="filter-section__head" (click)="toggleSection('mfr')">
+            <span>Manufacturer</span>
+            <span class="caret" [class.caret--up]="!isSectionCollapsed('mfr')">›</span>
+          </div>
+          @if (!isSectionCollapsed('mfr')) {
+            <div class="filter-section__body">
+              @for (mfr of manufacturers; track mfr) {
+                <label class="filter-checkbox">
+                  <input type="checkbox"
+                         [checked]="selectedManufacturers().has(mfr)"
+                         (change)="toggleManufacturer(mfr)" />
+                  <span class="checkmark"></span>
+                  @if (manufacturerLogo(mfr); as logo) {
+                    <img class="filter-checkbox__logo" [class.filter-checkbox__logo--dark]="manufacturerLogoDark(mfr)"
+                         [src]="logo" [alt]="mfr" />
+                  }
+                  <span class="filter-checkbox__label">{{ mfr }}</span>
+                </label>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Product Type -->
+        <div class="filter-section">
+          <div class="filter-section__head" (click)="toggleSection('type')">
+            <span>Product Type</span>
+            <span class="caret" [class.caret--up]="!isSectionCollapsed('type')">›</span>
+          </div>
+          @if (!isSectionCollapsed('type')) {
+            <div class="filter-section__body">
+              @for (type of productTypes; track type) {
+                <label class="filter-checkbox">
+                  <input type="checkbox"
+                         [checked]="selectedProductTypes().has(type)"
+                         (change)="toggleProductType(type)" />
+                  <span class="checkmark"></span>
+                  <span class="filter-checkbox__label">{{ type }}</span>
+                </label>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Mounting Style -->
+        <div class="filter-section">
+          <div class="filter-section__head" (click)="toggleSection('mount')">
+            <span>Mounting Style</span>
+            <span class="caret" [class.caret--up]="!isSectionCollapsed('mount')">›</span>
+          </div>
+          @if (!isSectionCollapsed('mount')) {
+            <div class="filter-section__body">
+              @for (style of mountingStyles; track style) {
+                <label class="filter-checkbox">
+                  <input type="checkbox"
+                         [checked]="selectedMountingStyles().has(style)"
+                         (change)="toggleMountingStyle(style)" />
+                  <span class="checkmark"></span>
+                  <span class="filter-checkbox__label">{{ style }}</span>
+                </label>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Price Range -->
+        <div class="filter-section">
+          <div class="filter-section__head" (click)="toggleSection('price')">
+            <span>Price Range (₹ INR)</span>
+            <span class="caret" [class.caret--up]="!isSectionCollapsed('price')">›</span>
+          </div>
+          @if (!isSectionCollapsed('price')) {
+            <div class="filter-section__body">
+              <div class="price-inputs">
+                <div class="price-input-group">
+                  <label>Min (₹)</label>
+                  <input type="number" class="price-input"
+                         [value]="priceMin()"
+                         (change)="onPriceMinChange($event)"
+                         [min]="0" [max]="priceMax()" />
+                </div>
+                <span class="price-dash">—</span>
+                <div class="price-input-group">
+                  <label>Max (₹)</label>
+                  <input type="number" class="price-input"
+                         [value]="priceMax()"
+                         (change)="onPriceMaxChange($event)"
+                         [min]="priceMin()" [max]="globalMaxPrice" />
+                </div>
+              </div>
+              <div class="price-range-bar">
+                <input type="range" class="range-slider"
+                       [min]="0" [max]="globalMaxPrice" [step]="100"
+                       [value]="priceMin()"
+                       (input)="onPriceMinChange($event)" />
+                <input type="range" class="range-slider"
+                       [min]="0" [max]="globalMaxPrice" [step]="100"
+                       [value]="priceMax()"
+                       (input)="onPriceMaxChange($event)" />
+              </div>
+              <div class="price-display">
+                ₹{{ priceMin().toLocaleString('en-IN') }} — ₹{{ priceMax().toLocaleString('en-IN') }}
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Compliance -->
+        <div class="filter-section filter-section--last">
+          <div class="filter-section__head" (click)="toggleSection('rohs')">
+            <span>Compliance</span>
+            <span class="caret" [class.caret--up]="!isSectionCollapsed('rohs')">›</span>
+          </div>
+          @if (!isSectionCollapsed('rohs')) {
+            <div class="filter-section__body">
+              <label class="filter-checkbox">
+                <input type="checkbox" [checked]="rohsOnly()" (change)="rohsOnly.set(!rohsOnly()); currentPage.set(1)" />
+                <span class="checkmark"></span>
+                <span class="filter-checkbox__label">RoHS Compliant</span>
+              </label>
+            </div>
+          }
+        </div>
+      </aside>
+
+      <!-- ── PRODUCT RESULTS ─────────────────────────────────────────────── -->
+      <div class="results">
+
+        <!-- Empty state -->
+        @if (filteredProducts.length === 0) {
+          <div class="no-results">
+            <div class="no-results__icon">🔍</div>
+            <h3>No products match your filters</h3>
+            <p>Try adjusting or clearing your filters to see more results.</p>
+            <button class="btn-clear-filters" (click)="clearAllFilters()">Clear All Filters</button>
+          </div>
+        }
+
+        <!-- ── GRID VIEW ─────────────────────────────────────────────────── -->
+        @if (viewMode() === 'grid' && filteredProducts.length > 0) {
+          <div class="products-grid">
+            @for (product of pagedProducts; track product.id) {
+              <div class="product-card">
+                <a [routerLink]="['/product', product.id]" class="product-card__img-link">
+                  <div class="product-card__img">
+                    <img class="product-card__img-icon" width="84" height="84" [src]="product.image" [alt]="product.title"
+                         (error)="onImgError($event, product.category)" />
+                    @if (product.rohs) {
+                      <span class="rohs-badge">RoHS</span>
+                    }
+                  </div>
+                </a>
+                <div class="product-card__body">
+                  <span class="product-card__mfr">{{ product.manufacturer }}</span>
+                  <a [routerLink]="['/product', product.id]" class="product-card__pn">
+                    {{ product.manufacturerPartNumber }}
+                  </a>
+                  <a [routerLink]="['/product', product.id]" class="product-card__title">
+                    {{ product.title }}
+                  </a>
+                  <span class="product-card__type">{{ product.productType }}</span>
+                  <div class="product-card__meta">
+                    @if (product.package) {
+                      <span class="meta-chip">{{ product.package }}</span>
+                    }
+                    @if (product.mountingStyle && product.mountingStyle !== 'N/A') {
+                      <span class="meta-chip">{{ product.mountingStyle }}</span>
+                    }
+                  </div>
+                  <div class="product-card__stock">
+                    @if (product.availability > 0) {
+                      <span class="chip chip--green">{{ formatAvail(product.availability) }} in stock</span>
+                    } @else {
+                      <span class="chip chip--orange">{{ product.stockStatus }}</span>
+                    }
+                  </div>
+                  <div class="product-card__footer">
+                    <div class="product-card__pricing">
+                      <span class="product-card__price">{{ formatPrice(product) }}</span>
+                      <span class="product-card__unit">/ unit</span>
+                    </div>
+                    <button class="btn-add"
+                            [class.btn-add--done]="addedId() === product.id"
+                            (click)="addToCart(product)">
+                      @if (addedId() === product.id) { ✓ } @else { + Add }
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- ── LIST VIEW ─────────────────────────────────────────────────── -->
+        @if (viewMode() === 'list' && filteredProducts.length > 0) {
+          <div class="products-list">
+            <table class="list-table">
+              <thead>
+                <tr>
+                  <th>Part Number</th>
+                  <th>Description</th>
+                  <th>Manufacturer</th>
+                  <th>Package</th>
+                  <th>Availability</th>
+                  <th>Unit Price</th>
+                  <th>Qty</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (product of pagedProducts; track product.id) {
+                  <tr class="list-row">
+                    <td>
+                      <a [routerLink]="['/product', product.id]" class="pn-link">
+                        {{ product.manufacturerPartNumber }}
+                      </a>
+                      @if (product.rohs) {
+                        <span class="inline-rohs">RoHS</span>
+                      }
+                    </td>
+                    <td>
+                      <a [routerLink]="['/product', product.id]" class="desc-link">{{ product.title }}</a>
+                      <div class="list-type">{{ product.productType }}</div>
+                    </td>
+                    <td class="list-mfr">{{ product.manufacturer }}</td>
+                    <td>{{ product.package }}</td>
+                    <td>
+                      @if (product.availability > 0) {
+                        <span class="chip chip--green">{{ formatAvail(product.availability) }}</span>
+                      } @else {
+                        <span class="chip chip--orange">{{ product.stockStatus }}</span>
+                      }
+                    </td>
+                    <td class="list-price">{{ formatPrice(product) }}</td>
+                    <td>
+                      <input type="text" inputmode="numeric" class="list-qty-input"
+                             [value]="getQty(product.id)"
+                             (change)="setQty(product.id, $event)" />
+                    </td>
+                    <td>
+                      <button class="btn-add btn-add--sm"
+                              [class.btn-add--done]="addedId() === product.id"
+                              (click)="addToCart(product, getQty(product.id))">
+                        @if (addedId() === product.id) { ✓ } @else { + Add }
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+
+        <!-- ── PAGINATION ────────────────────────────────────────────────── -->
+        @if (filteredProducts.length > 0 && totalPages > 1) {
+          <div class="pagination">
+            <div class="pagination__info">
+              Showing {{ showingFrom }}–{{ showingTo }} of {{ filteredProducts.length }} results
+            </div>
+            <div class="pagination__controls">
+              <!-- Prev -->
+              <button class="page-btn page-btn--nav"
+                      [disabled]="currentPage() === 1"
+                      (click)="prevPage()">
+                ‹ Prev
+              </button>
+
+              <!-- Page numbers -->
+              @for (page of pageNumbers; track $index) {
+                @if (page === '...') {
+                  <span class="page-ellipsis">…</span>
+                } @else {
+                  <button class="page-btn"
+                          [class.page-btn--active]="currentPage() === page"
+                          (click)="goToPage(page)">
+                    {{ page }}
+                  </button>
+                }
+              }
+
+              <!-- Next -->
+              <button class="page-btn page-btn--nav"
+                      [disabled]="currentPage() === totalPages"
+                      (click)="nextPage()">
+                Next ›
+              </button>
+            </div>
+
+            <!-- Page jump -->
+            <div class="pagination__jump">
+              <span>Page</span>
+              <input type="number" class="page-jump-input"
+                     [value]="currentPage()"
+                     [min]="1" [max]="totalPages"
+                     (change)="goToPage(+(($event.target)!['value']))" />
+              <span>of {{ totalPages }}</span>
+            </div>
+          </div>
+        }
+
+        <!-- Show count summary even on single page -->
+        @if (filteredProducts.length > 0 && totalPages === 1) {
+          <div class="results-footer">
+            Showing all {{ filteredProducts.length }} products
+          </div>
+        }
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

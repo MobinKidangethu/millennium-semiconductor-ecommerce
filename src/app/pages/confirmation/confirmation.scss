@@ -40,7 +40,7 @@
 
     .confirm-card__header{
       background:#eef6ff;
-      color:#0b5ed7;
+      color:var(--color-primary);
     }
 
   }
@@ -120,7 +120,7 @@
     .order-num{
 
       font-size:24px;
-      color:#0056d6;
+      color:var(--color-primary);
       font-weight:700;
       margin:5px 0;
 
@@ -177,7 +177,7 @@
   &__total td{
 
     font-size:18px;
-    color:#0056d6;
+    color:var(--color-primary);
     font-weight:700;
 
   }
@@ -186,7 +186,7 @@
 
 .part-link{
 
-  color:#0056d6;
+  color:var(--color-primary);
   cursor:pointer;
   font-weight:600;
   text-decoration:none;
@@ -447,7 +447,7 @@
 
 .sidebar-links a{
 
-  color:#0056d6;
+  color:var(--color-primary);
 
   text-decoration:none;
 
@@ -497,7 +497,7 @@
 
 .btn-download{
 
-  background:#0056d6;
+  background:var(--color-primary);
 
   color:#fff;
 
@@ -505,7 +505,7 @@
 
 .btn-download:hover{
 
-  background:#0048b5;
+  background:var(--color-primary-dark);
 
 }
 
@@ -533,7 +533,7 @@
 
   height:42px;
 
-  background:#0056d6;
+  background:var(--color-primary);
 
   color:#fff;
 
@@ -595,6 +595,32 @@
     display:block;
     overflow:auto;
 
+  }
+}
+
+/* ===============================
+   Print styles
+=================================*/
+@media print {
+  .no-print { display: none !important; }
+
+  .confirm-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
+  .confirm-main, .confirm-sidebar {
+    width: 100%;
+  }
+
+  .confirm-card, .success-banner {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 12px;
   }
 
 }

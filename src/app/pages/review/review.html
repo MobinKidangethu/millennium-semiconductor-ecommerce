@@ -25,10 +25,10 @@
               </div>
             </div>
             <div class="review-item__qty-price">
-              {{ item.qty }} × ${{ (item.product.price/84).toFixed(2) }}
+              {{ item.qty }} × {{ formatINR(item.product.price) }}
             </div>
             <div class="review-item__total">
-              ${{ ((item.product.price/84) * item.qty).toFixed(2) }}
+              {{ formatINR(item.product.price * item.qty) }}
             </div>
           </div>
         }
@@ -111,7 +111,7 @@
         Non-stock items are subject to manufacturer lead times and cannot be cancelled once submitted.
       </label>
       <button class="btn-place-order" (click)="placeOrder()">
-        🔒 Place Order — ${{ cart.total().toFixed(2) }}
+        🔒 Place Order — {{ formatINR(cart.total()) }}
       </button>
       <div class="secure-note">🔒 Secure 256-bit SSL encrypted transaction</div>
     </div>
@@ -124,11 +124,11 @@
     <div class="checkout-card">
       <div class="checkout-card__header"><span>📋 Order Total</span></div>
       <div class="sidebar-totals">
-        <div class="summary-row"><span>{{ cart.itemCount() }} items</span><span>${{ cart.subtotal().toFixed(2) }}</span></div>
+        <div class="summary-row"><span>{{ cart.itemCount() }} items</span><span>{{ formatINR(cart.subtotal()) }}</span></div>
         <div class="summary-row"><span>Shipping</span><span class="free">FREE</span></div>
-        <div class="summary-row"><span>Tax (8.5%)</span><span>${{ cart.tax().toFixed(2) }}</span></div>
-        <div class="summary-row summary-row--total"><span>Total Charged</span><span class="total">${{ cart.total().toFixed(2) }}</span></div>
-        <small class="tax-note">USD, ex. sales tax shown above</small>
+        <div class="summary-row"><span>GST (18%)</span><span>{{ formatINR(cart.tax()) }}</span></div>
+        <div class="summary-row summary-row--total"><span>Total Charged</span><span class="total">{{ formatINR(cart.total()) }}</span></div>
+        <small class="tax-note">INR, inc. GST as shown above</small>
       </div>
       <div class="trust-list">
         <div>✅ Authorized distributor</div>

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Product } from '../models/product.model';
 import productsJson from '../../../assets/data/products.json';
@@ -24,7 +23,21 @@ export class ProductService {
     return of(this.products.filter(p => p.category === cat));
   }
 
+  search(query: string): Observable<Product[]> {
+    const q = query.toLowerCase();
+    return of(this.products.filter(p =>
+      p.title.toLowerCase().includes(q) ||
+      p.manufacturerPartNumber.toLowerCase().includes(q) ||
+      p.manufacturer.toLowerCase().includes(q) ||
+      p.productType.toLowerCase().includes(q)
+    ));
+  }
+
   getManufacturers(): string[] {
     return [...new Set(this.products.map(p => p.manufacturer))].slice(0, 8);
+  }
+
+  getCategories(): string[] {
+    return [...new Set(this.products.map(p => p.category))];
   }
 }

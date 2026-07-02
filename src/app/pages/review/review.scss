@@ -9,7 +9,7 @@
   }
 }
 
-.btn-edit-link { color: #1a3a6b; font-size: 12px; text-decoration: none; font-weight: 600; &:hover { text-decoration: underline; } }
+.btn-edit-link { color: var(--color-primary); font-size: 12px; text-decoration: none; font-weight: 600; &:hover { text-decoration: underline; } }
 
 .review-items { padding: 0; }
 
@@ -27,8 +27,8 @@
     border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 24px;
   }
 
-  &__mfr { font-size: 10px; color: #1a3a6b; font-weight: 600; }
-  &__title { font-size: 13px; font-weight: 700; color: #1a3a6b; text-decoration: none; display: block; margin-bottom: 2px;
+  &__mfr { font-size: 10px; color: var(--color-primary); font-weight: 600; }
+  &__title { font-size: 13px; font-weight: 700; color: var(--color-primary); text-decoration: none; display: block; margin-bottom: 2px;
     &:hover { text-decoration: underline; }
   }
   &__desc { font-size: 11px; color: #888; margin-bottom: 5px; }
@@ -142,14 +142,14 @@
   line-height: 1.6;
   margin-bottom: 16px;
 
-  input { margin-top: 2px; accent-color: #1a3a6b; flex-shrink: 0; }
-  a { color: #1a3a6b; }
+  input { margin-top: 2px; accent-color: var(--color-primary); flex-shrink: 0; }
+  a { color: var(--color-primary); }
 }
 
 .btn-place-order {
   display: block;
   width: 100%;
-  background: #1a3a6b;
+  background: var(--color-primary);
   color: white;
   border: none;
   padding: 14px;
@@ -159,18 +159,18 @@
   cursor: pointer;
   margin-bottom: 10px;
   transition: background 0.2s;
-  &:hover { background: #0f2550; }
+  &:hover { background: var(--color-primary-dark); }
 }
 
 .secure-note { text-align: center; font-size: 11px; color: #888; }
 
-.btn-back { color: #1a3a6b; font-size: 13px; text-decoration: none; font-weight: 600; &:hover { text-decoration: underline; } }
+.btn-back { color: var(--color-primary); font-size: 13px; text-decoration: none; font-weight: 600; &:hover { text-decoration: underline; } }
 
 .order-sidebar { position: sticky; top: 20px; }
 .sidebar-totals { padding: 12px 20px; }
 .summary-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; color: #555;
   &--total { margin-top: 4px; padding-top: 10px; border-top: 1px solid #e0e6ee; font-weight: 700; color: #1a1a2e; }
 }
-.total { color: #1a3a6b; font-size: 16px; font-weight: 800; }
+.total { color: var(--color-primary); font-size: 16px; font-weight: 800; }
 .tax-note { font-size: 10px; color: #aaa; padding: 0 0 8px; display: block; }
 .trust-list { padding: 12px 20px; display: flex; flex-direction: column; gap: 6px; font-size: 11px; color: #777; border-top: 1px solid #f0f0f0; }

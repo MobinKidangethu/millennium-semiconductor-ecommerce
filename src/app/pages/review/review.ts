@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CartService } from '../../core/services/cart.service';
 import { CheckoutService } from '../../core/services/checkout.service';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
 import { CheckoutStepper } from '../../shared/checkout-stepper/checkout-stepper';
+import { inr } from '../../core/utils/price.utils';
 
 @Component({
   selector: 'app-review',
@@ -18,10 +19,11 @@ export class Review {
   checkout = inject(CheckoutService);
   private router = inject(Router);
 
+  get addr() { return this.checkout.shippingAddress(); }
+
   placeOrder() {
     this.router.navigate(['/checkout/confirmation']);
   }
 
-  get addr() { return this.checkout.shippingAddress(); }
-  get method() { return this.checkout.shippingMethod(); }
+  formatINR(amount: number): string { return inr(amount); }
 }

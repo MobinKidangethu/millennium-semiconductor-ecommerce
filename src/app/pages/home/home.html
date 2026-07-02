@@ -13,7 +13,7 @@
         electronics components.
       </p>
       <div class="hero__ctas">
-        <button class="btn btn--primary">Shop Now</button>
+        <a routerLink="/products" class="btn btn--primary">Shop Now</a>
         <a href="#" class="btn btn--ghost">View Datasheet →</a>
       </div>
     </div>
@@ -27,23 +27,23 @@
 <div class="stats-bar">
   <div class="stats-bar__inner">
     <div class="stat">
-      <span class="stat__icon">📦</span>
+      <img class="stat__icon" [src]="icon('products-in-stock')" alt="" />
       <div><strong>6.8M+</strong><span>Products In Stock</span></div>
     </div>
     <div class="stat">
-      <span class="stat__icon">🏭</span>
+      <img class="stat__icon" [src]="icon('manufacturers')" alt="" />
       <div><strong>1,200+</strong><span>Manufacturers</span></div>
     </div>
     <div class="stat">
-      <span class="stat__icon">🚚</span>
+      <img class="stat__icon" [src]="icon('same-day-ship')" alt="" />
       <div><strong>Same Day</strong><span>Shipping Available</span></div>
     </div>
     <div class="stat">
-      <span class="stat__icon">✅</span>
+      <img class="stat__icon" [src]="icon('authorized-distributor')" alt="" />
       <div><strong>100%</strong><span>Authorized Distributors</span></div>
     </div>
     <div class="stat">
-      <span class="stat__icon">🎧</span>
+      <img class="stat__icon" [src]="icon('technical-support')" alt="" />
       <div><strong>24/7</strong><span>Technical Support</span></div>
     </div>
   </div>
@@ -54,16 +54,16 @@
   <div class="container">
     <div class="section__header">
       <h2>Shop by Category</h2>
-      <a href="#" class="link-more">View All Categories →</a>
+      <a routerLink="/products" class="link-more">View All Categories →</a>
     </div>
     <div class="categories-grid">
       @for (cat of categories; track cat.name) {
-        <div class="category-card">
-          <span class="category-card__icon">{{ cat.icon }}</span>
+        <a [routerLink]="['/products', cat.name.toLowerCase().replace(' ', '-')]" class="category-card">
+          <img class="category-card__icon" [src]="categoryIcon(cat.name)" alt="" />
           <strong>{{ cat.name }}</strong>
           <span class="category-card__sub">{{ cat.sub }}</span>
           <span class="category-card__count">{{ cat.count }}</span>
-        </div>
+        </a>
       }
     </div>
   </div>
@@ -74,14 +74,15 @@
   <div class="container">
     <div class="section__header">
       <h2>Trending Products</h2>
-      <a href="#" class="link-more">View All →</a>
+      <a routerLink="/products" class="link-more">View All →</a>
     </div>
     <div class="products-grid">
-      @for (product of trending(); track product.id) {
+      @for (product of trending(); track product.id; let i = $index) {
         <div class="product-card">
           <a [routerLink]="['/product', product.id]" class="product-card__img-link">
             <div class="product-card__img">
-              <span>🔧</span>
+              <img width="84" height="84" [src]="trendingImage(i)" [alt]="product.title"
+                   (error)="onImgError($event, product.category)" />
             </div>
           </a>
           <div class="product-card__body">
@@ -119,7 +120,14 @@
     <div class="manufacturers-grid">
       @for (mfr of manufacturers; track mfr) {
         <div class="manufacturer-card">
-          <div class="manufacturer-card__logo">{{ mfr[0] }}</div>
+          @if (manufacturerLogo(mfr); as logo) {
+            <div class="manufacturer-card__logo manufacturer-card__logo--img"
+                 [class.manufacturer-card__logo--dark]="manufacturerLogoDark(mfr)">
+              <img [src]="logo" [alt]="mfr" />
+            </div>
+          } @else {
+            <div class="manufacturer-card__logo">{{ mfr[0] }}</div>
+          }
           <span>{{ mfr }}</span>
         </div>
       }
@@ -132,19 +140,19 @@
   <div class="container">
     <div class="value-props__grid">
       <div class="value-prop">
-        <span>🚚</span>
+        <img [src]="icon('shipping-available')" alt="" />
         <div><strong>Free Shipping</strong><small>On orders over $50</small></div>
       </div>
       <div class="value-prop">
-        <span>💰</span>
+        <img [src]="icon('volume-pricing')" alt="" />
         <div><strong>Volume Pricing</strong><small>Save up to 40% on bulk orders</small></div>
       </div>
       <div class="value-prop">
-        <span>⏰</span>
+        <img [src]="icon('same-day-ship')" alt="" />
         <div><strong>Same Day Ship</strong><small>Order by 3PM, ships today</small></div>
       </div>
       <div class="value-prop">
-        <span>✅</span>
+        <img [src]="icon('authorized-distributor')" alt="" />
         <div><strong>Authorized Distributor</strong><small>All products 100% genuine</small></div>
       </div>
     </div>

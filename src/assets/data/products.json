@@ -17,13 +17,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "IGBTs",
-    "technology": "SiC",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "PG-TO263-7",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
   },
   {
     "id": 2,
@@ -39,17 +39,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 3,
@@ -65,17 +65,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 4,
@@ -91,17 +91,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 5,
@@ -117,17 +117,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 6,
@@ -143,17 +143,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 7,
@@ -173,13 +173,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 8,
@@ -199,13 +199,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 9,
@@ -225,13 +225,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 10,
@@ -247,17 +247,17 @@
     "stockStatus": "In Stock",
     "price": 120.2,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Zener Diodes",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 11,
@@ -273,17 +273,17 @@
     "stockStatus": "In Stock",
     "price": 92.25,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Zener Diodes",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 12,
@@ -299,17 +299,17 @@
     "stockStatus": "In Stock",
     "price": 88.52,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Zener Diodes",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 13,
@@ -329,13 +329,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 14,
@@ -355,13 +355,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMPD-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 15,
@@ -381,13 +381,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "DO-218AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SE50124-M3I.webp"
   },
   {
     "id": 16,
@@ -407,13 +407,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-218AC-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
   },
   {
     "id": 17,
@@ -433,13 +433,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-218AC-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 18,
@@ -459,13 +459,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-214AA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/FS01M5R12A7MA2BHPSA1.webp"
   },
   {
     "id": 19,
@@ -485,13 +485,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-214AA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/IMBG75R016M2HXTMA1.webp"
   },
   {
     "id": 20,
@@ -514,10 +514,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/KBPE0480-M3P.webp"
   },
   {
     "id": 21,
@@ -540,10 +540,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SE50124-M3I.webp"
   },
   {
     "id": 22,
@@ -566,10 +566,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SS8PH102-M3I.webp"
   },
   {
     "id": 23,
@@ -589,13 +589,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/VS-4C20ET07S2L-M3.webp"
   },
   {
     "id": 24,
@@ -615,13 +615,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 25,
@@ -637,17 +637,17 @@
     "stockStatus": "In Stock",
     "price": 112.75,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 26,
@@ -663,17 +663,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 27,
@@ -693,13 +693,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 28,
@@ -719,13 +719,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 29,
@@ -745,13 +745,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 30,
@@ -767,17 +767,17 @@
     "stockStatus": "In Stock",
     "price": 89.45,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Zener Diodes",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 31,
@@ -800,10 +800,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMPC (TO-277A-3)",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SS8PH102-M3I.webp"
   },
   {
     "id": 32,
@@ -823,13 +823,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 33,
@@ -849,13 +849,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "SiC Schottky Diodes",
-    "technology": "N/A",
+    "technology": "SiC",
     "mountingStyle": "SMD/SMT",
     "package": "TO-263AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/VS-4C20ET07S2L-M3.webp"
   },
   {
     "id": 34,
@@ -875,13 +875,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
   },
   {
     "id": 35,
@@ -901,13 +901,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 36,
@@ -927,13 +927,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Zener Diodes",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "SOD-323",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/FS01M5R12A7MA2BHPSA1.webp"
   },
   {
     "id": 37,
@@ -949,17 +949,17 @@
     "stockStatus": "In Stock",
     "price": 110.88,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 38,
@@ -975,17 +975,17 @@
     "stockStatus": "In Stock",
     "price": 112.75,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 39,
@@ -1001,17 +1001,17 @@
     "stockStatus": "In Stock",
     "price": 112.75,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 40,
@@ -1027,17 +1027,17 @@
     "stockStatus": "In Stock",
     "price": 110.88,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 41,
@@ -1053,17 +1053,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 42,
@@ -1079,17 +1079,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 43,
@@ -1109,13 +1109,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 44,
@@ -1135,13 +1135,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 45,
@@ -1161,13 +1161,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMPD-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/IMBG75R016M2HXTMA1.webp"
   },
   {
     "id": 46,
@@ -1187,13 +1187,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-214AA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/KBPE0480-M3P.webp"
   },
   {
     "id": 47,
@@ -1213,13 +1213,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-214AA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SE50124-M3I.webp"
   },
   {
     "id": 48,
@@ -1239,13 +1239,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SS8PH102-M3I.webp"
   },
   {
     "id": 49,
@@ -1265,13 +1265,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "SiC Schottky Diodes",
-    "technology": "N/A",
+    "technology": "SiC",
     "mountingStyle": "Through Hole",
     "package": "TO-247AD-3",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/VS-4C20ET07S2L-M3.webp"
   },
   {
     "id": 50,
@@ -1291,13 +1291,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 51,
@@ -1313,17 +1313,17 @@
     "stockStatus": "In Stock",
     "price": 88.52,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Zener Diodes",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 52,
@@ -1343,13 +1343,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-218AC-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 53,
@@ -1372,10 +1372,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMPC (TO-277A-3)",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SS8PH102-M3I.webp"
   },
   {
     "id": 54,
@@ -1395,13 +1395,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
   },
   {
     "id": 55,
@@ -1421,13 +1421,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "SiC Schottky Diodes",
-    "technology": "N/A",
+    "technology": "SiC",
     "mountingStyle": "SMD/SMT",
     "package": "TO-263AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/VS-4C20ET07S2L-M3.webp"
   },
   {
     "id": 56,
@@ -1447,13 +1447,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "SiC Schottky Diodes",
-    "technology": "N/A",
+    "technology": "SiC",
     "mountingStyle": "Through Hole",
     "package": "TO-247AD-3",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 57,
@@ -1469,17 +1469,17 @@
     "stockStatus": "In Stock",
     "price": 110.88,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 58,
@@ -1495,17 +1495,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 59,
@@ -1525,13 +1525,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 60,
@@ -1551,13 +1551,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 61,
@@ -1577,13 +1577,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 62,
@@ -1606,10 +1606,10 @@
     "technology": "Si",
     "mountingStyle": "Through Hole",
     "package": "KBP-4",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/KBPE0480-M3P.webp"
   },
   {
     "id": 63,
@@ -1632,10 +1632,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/FS01M5R12A7MA2BHPSA1.webp"
   },
   {
     "id": 64,
@@ -1658,10 +1658,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/IMBG75R016M2HXTMA1.webp"
   },
   {
     "id": 65,
@@ -1684,10 +1684,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/KBPE0480-M3P.webp"
   },
   {
     "id": 66,
@@ -1710,10 +1710,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SE50124-M3I.webp"
   },
   {
     "id": 67,
@@ -1736,10 +1736,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-277A-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SS8PH102-M3I.webp"
   },
   {
     "id": 68,
@@ -1759,13 +1759,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/VS-4C20ET07S2L-M3.webp"
   },
   {
     "id": 69,
@@ -1785,13 +1785,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 70,
@@ -1811,13 +1811,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "SiC Schottky Diodes",
-    "technology": "N/A",
+    "technology": "SiC",
     "mountingStyle": "SMD/SMT",
     "package": "TO-263AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/VS-4C20ET07S2L-M3.webp"
   },
   {
     "id": 71,
@@ -1837,13 +1837,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "SMB (DO-214AA)",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 72,
@@ -1866,10 +1866,10 @@
     "technology": "SiC",
     "mountingStyle": "SMD/SMT",
     "package": "TO-263-7",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/IMBG75R016M2HXTMA1.webp"
   },
   {
     "id": 73,
@@ -1892,10 +1892,10 @@
     "technology": "SiC",
     "mountingStyle": "SMD/SMT",
     "package": "PG-HDSOP-22",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
   },
   {
     "id": 74,
@@ -1916,12 +1916,12 @@
     "lifecycle": "New Product",
     "productType": "MOSFETs",
     "technology": "Si",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "mountingStyle": "SMD/SMT",
+    "package": "PG-WHSON-8",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 75,
@@ -1944,10 +1944,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TSOP-6F",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/FS01M5R12A7MA2BHPSA1.webp"
   },
   {
     "id": 76,
@@ -1967,13 +1967,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "GaN FETs",
-    "technology": "SiC",
+    "technology": "GaN",
     "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 77,
@@ -1989,17 +1989,17 @@
     "stockStatus": "In Stock",
     "price": 353.15,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "MOSFETs",
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SOP-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/IMBG75R016M2HXTMA1.webp"
   },
   {
     "id": 78,
@@ -2022,10 +2022,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "PowerPAK SO-8L-4",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/KBPE0480-M3P.webp"
   },
   {
     "id": 79,
@@ -2048,10 +2048,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "PowerPAK SO-8L-4",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SE50124-M3I.webp"
   },
   {
     "id": 80,
@@ -2067,17 +2067,17 @@
     "stockStatus": "In Stock",
     "price": 409.99,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "MOSFETs",
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "PG-WHTFN-9",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SS8PH102-M3I.webp"
   },
   {
     "id": 81,
@@ -2100,10 +2100,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "WSON-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/VS-4C20ET07S2L-M3.webp"
   },
   {
     "id": 82,
@@ -2126,10 +2126,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "LHDSO-10",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 83,
@@ -2149,13 +2149,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-214AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 84,
@@ -2171,17 +2171,17 @@
     "stockStatus": "In Stock",
     "price": 254.38,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "MOSFETs",
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "PG-TDSON-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
   },
   {
     "id": 85,
@@ -2204,10 +2204,10 @@
     "technology": "Si",
     "mountingStyle": "Through Hole",
     "package": "TO-247-3",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 86,
@@ -2223,17 +2223,17 @@
     "stockStatus": "In Stock",
     "price": 114979.46,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Discrete Semiconductor Modules",
     "technology": "SiC",
     "mountingStyle": "Press Fit",
     "package": "HybridPACK",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/FS01M5R12A7MA2BHPSA1.webp"
   },
   {
     "id": 87,
@@ -2256,10 +2256,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "PG-TDSON-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/FS01M5R12A7MA2BHPSA1.webp"
   },
   {
     "id": 88,
@@ -2282,10 +2282,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "PowerPAK SO-8SW",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/IMBG75R016M2HXTMA1.webp"
   },
   {
     "id": 89,
@@ -2301,17 +2301,17 @@
     "stockStatus": "In Stock",
     "price": 1063.18,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "SiC MOSFETS",
     "technology": "SiC",
     "mountingStyle": "Through Hole",
     "package": "PG-TO-247-4",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/KBPE0480-M3P.webp"
   },
   {
     "id": 90,
@@ -2327,17 +2327,17 @@
     "stockStatus": "In Stock",
     "price": 329.86,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "MOSFETs",
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "PG-TDSON-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SE50124-M3I.webp"
   },
   {
     "id": 91,
@@ -2353,17 +2353,17 @@
     "stockStatus": "In Stock",
     "price": 110.88,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 92,
@@ -2379,17 +2379,17 @@
     "stockStatus": "In Stock",
     "price": 110.88,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 93,
@@ -2405,17 +2405,17 @@
     "stockStatus": "In Stock",
     "price": 112.75,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 94,
@@ -2431,17 +2431,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 95,
@@ -2461,13 +2461,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMPD-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SS8PH102-M3I.webp"
   },
   {
     "id": 96,
@@ -2487,13 +2487,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMPD-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/VS-4C20ET07S2L-M3.webp"
   },
   {
     "id": 97,
@@ -2513,13 +2513,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-214AA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 98,
@@ -2542,10 +2542,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "uSO8-FL",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 99,
@@ -2568,10 +2568,10 @@
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "uSO8-FL",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
   },
   {
     "id": 100,
@@ -2587,17 +2587,17 @@
     "stockStatus": "In Stock",
     "price": 112.75,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 101,
@@ -2613,17 +2613,17 @@
     "stockStatus": "In Stock",
     "price": 110.88,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 102,
@@ -2639,17 +2639,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 103,
@@ -2665,17 +2665,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 104,
@@ -2695,13 +2695,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 105,
@@ -2721,13 +2721,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 106,
@@ -2747,13 +2747,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 107,
@@ -2773,13 +2773,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/FS01M5R12A7MA2BHPSA1.webp"
   },
   {
     "id": 108,
@@ -2795,17 +2795,17 @@
     "stockStatus": "In Stock",
     "price": 89.45,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Zener Diodes",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "SMA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
   },
   {
     "id": 109,
@@ -2825,13 +2825,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Rectifiers",
-    "technology": "N/A",
+    "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "DO-218AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SE50124-M3I.webp"
   },
   {
     "id": 110,
@@ -2851,13 +2851,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-214AA-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/IMBG75R016M2HXTMA1.webp"
   },
   {
     "id": 111,
@@ -2873,17 +2873,17 @@
     "stockStatus": "In Stock",
     "price": 171.45,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "MOSFETs",
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "PowerPAK-SO-8L",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/KBPE0480-M3P.webp"
   },
   {
     "id": 112,
@@ -2899,17 +2899,17 @@
     "stockStatus": "In Stock",
     "price": 357.81,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "MOSFETs",
     "technology": "Si",
     "mountingStyle": "SMD/SMT",
     "package": "TO-263-7L",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SE50124-M3I.webp"
   },
   {
     "id": 113,
@@ -2929,13 +2929,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/SS8PH102-M3I.webp"
   },
   {
     "id": 114,
@@ -2951,17 +2951,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 115,
@@ -2977,17 +2977,17 @@
     "stockStatus": "In Stock",
     "price": 112.75,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 116,
@@ -3003,17 +3003,17 @@
     "stockStatus": "In Stock",
     "price": 112.75,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 117,
@@ -3029,17 +3029,17 @@
     "stockStatus": "In Stock",
     "price": 112.75,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 118,
@@ -3055,17 +3055,17 @@
     "stockStatus": "In Stock",
     "price": 110.88,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 119,
@@ -3081,17 +3081,17 @@
     "stockStatus": "In Stock",
     "price": 110.88,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 120,
@@ -3107,17 +3107,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 121,
@@ -3133,17 +3133,17 @@
     "stockStatus": "In Stock",
     "price": 127.66,
     "currency": "INR",
-    "rohs": false,
-    "rohsLabel": "N/A",
+    "rohs": true,
+    "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
-    "package": "N/A",
-    "image": "assets/images/placeholder-chip.png",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
+    "package": "DFN6546A",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/2KDFN27CA-M3H.webp"
   },
   {
     "id": 122,
@@ -3163,13 +3163,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 123,
@@ -3189,13 +3189,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 124,
@@ -3215,13 +3215,13 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DFN-8",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/3KDFN15CA-M3H.webp"
   },
   {
     "id": 125,
@@ -3241,12 +3241,12 @@
     "rohsLabel": "RoHS Compliant",
     "lifecycle": "New Product",
     "productType": "Electronic Component",
-    "technology": "N/A",
-    "mountingStyle": "N/A",
+    "technology": "Si",
+    "mountingStyle": "SMD/SMT",
     "package": "DO-219AB-2",
-    "image": "assets/images/placeholder-chip.png",
     "quantity": 1,
     "category": "Semiconductors",
-    "stockType": "Stock"
+    "stockType": "Stock",
+    "image": "assets/images/products/VS-4C20ET07S2L-M3.webp"
   }
 ]

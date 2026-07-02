@@ -34,15 +34,15 @@
 
   &--active {
     .step__circle {
-      background: #1a3a6b;
+      background: var(--color-primary);
       color: white;
     }
-    .step__label { color: #1a3a6b; font-weight: 700; }
+    .step__label { color: var(--color-primary); font-weight: 700; }
   }
 
   &--done {
     .step__circle {
-      background: #1a3a6b;
+      background: var(--color-primary);
       color: white;
     }
     .step__label { color: #555; }
@@ -55,7 +55,7 @@
     margin: 0 4px;
     flex-shrink: 0;
 
-    &--done { background: #1a3a6b; }
+    &--done { background: var(--color-primary); }
   }
 
   &__check { font-size: 14px; }

@@ -1,5 +1,5 @@
-<app-header></app-header>
-<app-checkout-stepper [activeStep]="5"></app-checkout-stepper>
+<div class="no-print"><app-header></app-header></div>
+<div class="no-print"><app-checkout-stepper [activeStep]="5"></app-checkout-stepper></div>
 
 <div class="confirm-container">
   <div class="confirm-main">
@@ -41,16 +41,16 @@
                 <small>{{ item.product.manufacturer }}</small></td>
               <td>{{ item.product.description || item.product.productType }}</td>
               <td>{{ item.qty }}</td>
-              <td>${{ (item.product.price/84).toFixed(2) }}</td>
-              <td>${{ ((item.product.price/84) * item.qty).toFixed(2) }}</td>
+              <td>{{ formatINR(item.product.price) }}</td>
+              <td>{{ formatINR(item.product.price * item.qty) }}</td>
             </tr>
           }
         </tbody>
         <tfoot>
-          <tr><td colspan="4">Subtotal ({{ orderItems.length }} items)</td><td>${{ orderSubtotal.toFixed(2) }}</td></tr>
+          <tr><td colspan="4">Subtotal ({{ orderItems.length }} items)</td><td>{{ formatINR(orderSubtotal) }}</td></tr>
           <tr><td colspan="4">Shipping</td><td class="free">Free</td></tr>
-          <tr><td colspan="4">Tax (0%)</td><td>$0.00</td></tr>
-          <tr class="order-table__total"><td colspan="4">Order Total</td><td>${{ orderSubtotal.toFixed(2) }}</td></tr>
+          <tr><td colspan="4">GST (18%)</td><td>{{ formatINR(orderTax) }}</td></tr>
+          <tr class="order-table__total"><td colspan="4">Order Total</td><td>{{ formatINR(orderTotal) }}</td></tr>
         </tfoot>
       </table>
     </div>
@@ -93,9 +93,9 @@
     </div>
 
     <!-- Action Buttons -->
-    <div class="confirm-actions">
-      <button class="btn-download">⬇ Download Order Summary (PDF)</button>
-      <button class="btn-print">🖨 Print Confirmation</button>
+    <div class="confirm-actions no-print">
+      <button class="btn-download" (click)="downloadPdf()">⬇ Download Order Summary (PDF)</button>
+      <button class="btn-print" (click)="printConfirmation()">🖨 Print Confirmation</button>
       <button class="btn-history">📋 View Order History</button>
     </div>
   </div>
@@ -118,11 +118,16 @@
     <div class="confirm-card">
       <div class="confirm-card__header"><span>📍 Shipping Address</span></div>
       <div class="sidebar-address">
-        <strong>Robert Chen</strong>
-        <span>Acme Corporation</span>
-        <span>5224 Industrial Blvd, Suite 400</span>
-        <span>Austin, TX 78701</span>
-        <span>United States</span>
+        <strong>{{ addr.firstName }} {{ addr.lastName }}</strong>
+        @if (addr.company) {
+          <span>{{ addr.company }}</span>
+        }
+        <span>{{ addr.address1 }}</span>
+        @if (addr.address2) {
+          <span>{{ addr.address2 }}</span>
+        }
+        <span>{{ addr.city }}, {{ addr.state }} {{ addr.zip }}</span>
+        <span>{{ addr.country }}</span>
         <div class="shipping-method-small">
           <span>🚚</span> Standard Ground — estimated Jan 26 – Feb 11
         </div>
@@ -140,7 +145,7 @@
     </div>
 
     <!-- Questions -->
-    <div class="confirm-card confirm-card--blue">
+    <div class="confirm-card confirm-card--blue no-print">
       <div class="confirm-card__header"><span>🎧 Questions About Your Order?</span></div>
       <div class="sidebar-help">
         <p>Contact our order management team with your order number for status updates or changes.</p>
@@ -150,7 +155,7 @@
     </div>
 
     <!-- Continue Shopping -->
-    <div class="confirm-card">
+    <div class="confirm-card no-print">
       <div class="confirm-card__header"><span>🛒 Continue Shopping</span></div>
       <div class="sidebar-links">
         <a routerLink="/">⬡ Browse Electromechanical</a>
@@ -162,4 +167,4 @@
   </div>
 </div>
 
-<app-footer></app-footer>
+<div class="no-print"><app-footer></app-footer></div>

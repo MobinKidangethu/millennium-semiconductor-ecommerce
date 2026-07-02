@@ -7,13 +7,15 @@ export class CartService {
 
   items = this._items.asReadonly();
 
+  lastAdded = signal<{ product: Product; qty: number } | null>(null);
+
   itemCount = computed(() => this._items().reduce((s, i) => s + i.qty, 0));
 
   subtotal = computed(() =>
     this._items().reduce((s, i) => s + i.product.price * i.qty, 0)
   );
 
-  tax = computed(() => +(this.subtotal() * 0.085).toFixed(2));
+  tax = computed(() => +(this.subtotal() * 0.18).toFixed(2));
 
   total = computed(() => +(this.subtotal() + this.tax()).toFixed(2));
 
@@ -27,6 +29,7 @@ export class CartService {
       }
       return [...items, { product, qty }];
     });
+    this.lastAdded.set({ product, qty });
   }
 
   updateQty(productId: number, qty: number) {

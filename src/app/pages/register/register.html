@@ -1,0 +1,57 @@
+<app-header></app-header>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-card__logo">
+      <img src="assets/Millenium_Logo_new.png" alt="Millennium Semiconductors" />
+    </div>
+    <h1 class="auth-card__title">Create your account</h1>
+    <p class="auth-card__subtitle">Register with Millennium Semiconductors to track orders, save parts lists, and get volume pricing.</p>
+
+    @if (error()) {
+      <div class="auth-error" style="margin-bottom: 14px;">{{ error() }}</div>
+    }
+
+    <form class="auth-form" (ngSubmit)="submit()">
+      <div class="auth-field">
+        <label for="reg-name">Full name</label>
+        <input id="reg-name" type="text" placeholder="Robert Chen"
+               [ngModel]="name()" (ngModelChange)="name.set($event)" name="name" autocomplete="name" />
+      </div>
+      <div class="auth-field">
+        <label for="reg-email">Email address</label>
+        <input id="reg-email" type="email" placeholder="you@company.com"
+               [ngModel]="email()" (ngModelChange)="email.set($event)" name="email" autocomplete="email" />
+      </div>
+      <div class="auth-field">
+        <label for="reg-password">Password</label>
+        <input id="reg-password" type="password" placeholder="At least 6 characters"
+               [ngModel]="password()" (ngModelChange)="password.set($event)" name="password" autocomplete="new-password" />
+      </div>
+      <div class="auth-field">
+        <label for="reg-confirm">Confirm password</label>
+        <input id="reg-confirm" type="password" placeholder="Re-enter your password"
+               [ngModel]="confirmPassword()" (ngModelChange)="confirmPassword.set($event)" name="confirmPassword" autocomplete="new-password" />
+      </div>
+
+      <label class="auth-checkbox">
+        <input type="checkbox" [ngModel]="agreeTerms()" (ngModelChange)="agreeTerms.set($event)" name="agreeTerms" />
+        I agree to the Terms of Service and Privacy Policy
+      </label>
+
+      <button type="submit" class="auth-btn-primary" [disabled]="submitting()">
+        {{ submitting() ? 'Creating account…' : 'Create Account' }}
+      </button>
+    </form>
+
+    <div class="auth-divider">OR</div>
+
+    <app-google-signin-mock (selected)="onGoogleSignIn()"></app-google-signin-mock>
+
+    <p class="auth-footer-note">
+      Already have an account? <a routerLink="/login">Sign in</a>
+    </p>
+  </div>
+</div>
+
+<app-footer></app-footer>
