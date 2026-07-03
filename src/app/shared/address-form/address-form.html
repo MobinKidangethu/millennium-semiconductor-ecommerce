@@ -1,0 +1,74 @@
+<div class="form-grid">
+  <div class="form-group">
+    <label>First Name *</label>
+    <input type="text" placeholder="Robert" [ngModel]="form().firstName" (ngModelChange)="updateField('firstName', $event)"/>
+  </div>
+  <div class="form-group">
+    <label>Last Name *</label>
+    <input type="text" placeholder="Chen" [ngModel]="form().lastName" (ngModelChange)="updateField('lastName', $event)"/>
+  </div>
+  <div class="form-group form-group--full">
+    <label>Company / Organization</label>
+    <input type="text" placeholder="Acme Electronics Inc." [ngModel]="form().company" (ngModelChange)="updateField('company', $event)"/>
+  </div>
+  <div class="form-group form-group--full">
+    <label>Address Line 1 *</label>
+    <input type="text" placeholder="Street address" [ngModel]="form().address1" (ngModelChange)="updateField('address1', $event)"/>
+  </div>
+  <div class="form-group form-group--full">
+    <label>Address Line 2</label>
+    <input type="text" placeholder="Suite, floor, unit..." [ngModel]="form().address2" (ngModelChange)="updateField('address2', $event)"/>
+  </div>
+  <div class="form-group">
+    <label>City *</label>
+    <input type="text" placeholder="Bengaluru" [ngModel]="form().city" (ngModelChange)="updateField('city', $event)"/>
+  </div>
+  <div class="form-group">
+    <label>ZIP / Postal Code *</label>
+    <input type="text" placeholder="560087" [ngModel]="form().zip" (ngModelChange)="updateField('zip', $event)"/>
+  </div>
+  <div class="form-group">
+    <label>Country *</label>
+    <select [ngModel]="form().country" (ngModelChange)="onCountryChange($event)">
+      <option>India</option>
+      <option>United States</option>
+      <option>United Kingdom</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>State / Province *</label>
+    @if (isIndia()) {
+      <select [ngModel]="stateChoice()" (ngModelChange)="onStateChoiceChange($event)">
+        <option value="" disabled>Select a state</option>
+        @for (s of indiaStates; track s) {
+          <option [value]="s">{{ s }}</option>
+        }
+        <option [value]="manualValue">Other / Manual Entry</option>
+      </select>
+      @if (isManualState()) {
+        <input type="text" placeholder="Enter state name" [ngModel]="manualState()" (ngModelChange)="onManualStateChange($event)"/>
+      }
+    } @else {
+      <input type="text" placeholder="State / Province" [ngModel]="form().state" (ngModelChange)="updateField('state', $event)"/>
+    }
+  </div>
+  <div class="form-group">
+    <label>Phone Number</label>
+    <input type="text" placeholder="+91 98765 43210" [ngModel]="form().phone" (ngModelChange)="updateField('phone', $event)"/>
+  </div>
+  <div class="form-group">
+    <label>PO Number (optional)</label>
+    <input type="text" placeholder="PO-2025-021" [ngModel]="form().po" (ngModelChange)="updateField('po', $event)"/>
+  </div>
+  @if (showDefaultToggle()) {
+    <div class="form-group form-group--full">
+      <label class="checkbox-label">
+        <input type="checkbox" [ngModel]="setDefault()" (ngModelChange)="setDefault.set($event)"/>
+        Set as default address
+      </label>
+    </div>
+  }
+  <div class="form-group form-group--full">
+    <button type="button" class="btn-continue" (click)="submit()">{{ saveLabel() }}</button>
+  </div>
+</div>

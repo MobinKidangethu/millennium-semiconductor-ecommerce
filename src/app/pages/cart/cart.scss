@@ -90,6 +90,8 @@
 .cart-item-desc { font-size: 11px; color: #888; margin-bottom: 6px; }
 .cart-item-badges { display: flex; gap: 6px; }
 
+app-backorder-badge { display: block; margin-top: 6px; }
+
 .price-unit { font-size: 10px; color: #888; font-weight: 400; }
 
 .chip {
@@ -282,6 +284,18 @@
     font-weight: 700;
     font-size: 15px;
   }
+}
+
+.backorder-notice {
+  background: #fff3e0;
+  color: #c07000;
+  border: 1px solid #f3d9a8;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 14px;
 }
 
 .free { color: #1a8040; font-weight: 700; }

@@ -23,6 +23,7 @@ export interface Product {
   quantity: number;
   category: string;
   stockType: string;
+  tags?: string[];
 }
 
 export interface CartItem {

@@ -1,0 +1,50 @@
+@if (info.isBackordered) {
+  <button type="button" class="backorder-chip" (click)="open()">
+    <span class="backorder-chip__icon">⚠</span>
+    <span>{{ info.dispatchQty | number }} ship now · {{ info.backorderedQty | number }} back-ordered</span>
+    <span class="backorder-chip__more">Details ⓘ</span>
+  </button>
+}
+
+@if (modalOpen()) {
+  <div class="backorder-modal-overlay" (click)="close()">
+    <div class="backorder-modal" (click)="$event.stopPropagation()">
+      <div class="backorder-modal__header">
+        <h3>On Order</h3>
+        <button type="button" class="backorder-modal__close" (click)="close()" aria-label="Close">✕</button>
+      </div>
+
+      <div class="backorder-modal__body">
+        <div class="backorder-modal__section">
+          <div class="backorder-modal__section-title">Details</div>
+          <div class="backorder-modal__row"><span>Mouser Part No:</span><strong>{{ product.mouserPartNumber }}</strong></div>
+          <div class="backorder-modal__row"><span>Mfr.'s Part No:</span><strong>{{ product.manufacturerPartNumber }}</strong></div>
+          <div class="backorder-modal__row"><span>Description:</span><strong>{{ product.description }}</strong></div>
+          <div class="backorder-modal__row"><span>Stock:</span><strong>{{ info.availableQty | number }} Can Dispatch Immediately</strong></div>
+          <div class="backorder-modal__row"><span>Factory Lead Time:</span><strong>{{ leadTimeWeeks }} Weeks</strong></div>
+        </div>
+
+        <div class="backorder-modal__section">
+          <div class="backorder-modal__section-title">Back-orders</div>
+          <p>
+            Your order of <strong>{{ info.requestedQty | number }}</strong> units exceeds the
+            <strong>{{ info.availableQty | number }}</strong> units currently in stock. We'll ship
+            <strong>{{ info.dispatchQty | number }}</strong> units immediately, and the remaining
+            <strong>{{ info.backorderedQty | number }}</strong> units will be placed on back-order.
+          </p>
+          <p>
+            Millennium Semiconductors will notify you by email of the expected delivery date as soon as
+            the delivery information has been confirmed by the factory. Back-ordered items are dispatched
+            complete once they arrive in stock. If you'd prefer to have each item dispatched as it
+            arrives, simply reply to your back-order notification email.
+          </p>
+          <p>
+            If more than one shipment is necessary to complete your order, Millennium Semiconductors will
+            cover standard shipping for the back-ordered portion within India. For international
+            back-order rates, please contact our sales team.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+}

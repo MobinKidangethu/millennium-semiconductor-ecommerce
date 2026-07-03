@@ -1,0 +1,108 @@
+.backorder-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 10px;
+  background: #fff3e0;
+  color: #c07000;
+  border: 1px solid #f3d9a8;
+  cursor: pointer;
+  line-height: 1.4;
+
+  &:hover { background: #ffe8c7; }
+
+  &__more {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+.backorder-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 16px;
+}
+
+.backorder-modal {
+  background: white;
+  border-radius: 12px;
+  width: 480px;
+  max-width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+
+    h3 { margin: 0; font-size: 16px; color: #1a1a2e; }
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+
+    &:hover { color: #1a1a2e; }
+  }
+
+  &__body {
+    padding: 16px 20px 20px;
+  }
+
+  &__section {
+    background: #f7f9fc;
+    border: 1px solid #eef1f6;
+    border-radius: 8px;
+    padding: 14px 16px;
+
+    & + & { margin-top: 14px; }
+
+    p {
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: #444;
+      margin: 0 0 8px;
+
+      &:last-child { margin-bottom: 0; }
+    }
+  }
+
+  &__section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 10px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12.5px;
+    padding: 5px 0;
+    border-bottom: 1px dashed #e3e8f0;
+    color: #555;
+
+    &:last-child { border-bottom: none; }
+
+    strong { color: #1a1a2e; text-align: right; }
+  }
+}

@@ -14,7 +14,7 @@
       <div class="success-banner__order">
         <div class="order-num-label">Order Number</div>
         <div class="order-num">#{{ orderNumber }}</div>
-        <div class="order-date">Placed on December 19, 2024 · 10:43 AM</div>
+        <div class="order-date">Placed on {{ order.placedAt | date:'MMMM d, y \'·\' h:mm a' }}</div>
       </div>
     </div>
 
@@ -49,7 +49,12 @@
         <tfoot>
           <tr><td colspan="4">Subtotal ({{ orderItems.length }} items)</td><td>{{ formatINR(orderSubtotal) }}</td></tr>
           <tr><td colspan="4">Shipping</td><td class="free">Free</td></tr>
-          <tr><td colspan="4">GST (18%)</td><td>{{ formatINR(orderTax) }}</td></tr>
+          @if (order.invoiceType === 'gst') {
+            <tr><td colspan="4">CGST (9%)</td><td>{{ formatINR(orderTax / 2) }}</td></tr>
+            <tr><td colspan="4">SGST (9%)</td><td>{{ formatINR(orderTax / 2) }}</td></tr>
+          } @else {
+            <tr><td colspan="4">GST (18%)</td><td>{{ formatINR(orderTax) }}</td></tr>
+          }
           <tr class="order-table__total"><td colspan="4">Order Total</td><td>{{ formatINR(orderTotal) }}</td></tr>
         </tfoot>
       </table>
@@ -64,7 +69,7 @@
           <div class="next-step__content">
             <strong>Confirmation Email Sent</strong>
             <span class="status-badge status-badge--done">Done</span>
-            <p>A full order summary has been sent to lkhorgan&#64;acmecorp.com</p>
+            <p>A full order summary has been sent to {{ userEmail }}</p>
           </div>
         </div>
         <div class="next-step">
@@ -94,9 +99,9 @@
 
     <!-- Action Buttons -->
     <div class="confirm-actions no-print">
-      <button class="btn-download" (click)="downloadPdf()">⬇ Download Order Summary (PDF)</button>
+      <button class="btn-download" (click)="downloadPdf()">⬇ Download {{ order.invoiceType === 'gst' ? 'GST' : 'Standard' }} Invoice (PDF)</button>
       <button class="btn-print" (click)="printConfirmation()">🖨 Print Confirmation</button>
-      <button class="btn-history">📋 View Order History</button>
+      <a class="btn-history" routerLink="/orders">📋 View Order History</a>
     </div>
   </div>
 
@@ -107,12 +112,37 @@
       <div class="confirm-card__header"><span>📋 Order Details</span></div>
       <div class="order-details">
         <div class="detail-row"><span>Order Number</span><a class="part-link">#{{ orderNumber }}</a></div>
-        <div class="detail-row"><span>Date Placed</span><span>Dec 19, 2024</span></div>
-        <div class="detail-row"><span>Payment Method</span><span>Net 30 — Account</span></div>
-        <div class="detail-row"><span>PO Number</span><span>PO-ACME-8841</span></div>
-        <div class="detail-row"><span>Lead Time</span><span>4–6 weeks</span></div>
+        <div class="detail-row"><span>Date Placed</span><span>{{ order.placedAt | date:'MMM d, y' }}</span></div>
+        <div class="detail-row"><span>Payment Method</span><span>{{ paymentLabel(order.paymentMethod) }}</span></div>
+        @if (order.paymentMethod === 'po' && checkout.poNumber()) {
+          <div class="detail-row"><span>PO Number</span><span>{{ checkout.poNumber() }}</span></div>
+        } @else if (addr.po) {
+          <div class="detail-row"><span>PO Number</span><span>{{ addr.po }}</span></div>
+        }
+        <div class="detail-row"><span>Status</span><span>{{ order.status }}</span></div>
       </div>
     </div>
+
+    @if (order.paymentMethod === 'wire') {
+      <div class="confirm-card confirm-card--blue">
+        <div class="confirm-card__header"><span>🏦 Wire Transfer Pending</span></div>
+        <div class="sidebar-help">
+          <p>Send <strong>{{ formatINR(orderTotal) }}</strong> to HDFC Bank, A/C 50200012345678, IFSC HDFC0000123,
+            referencing order <strong>#{{ orderNumber }}</strong>. We'll begin processing once payment is received
+            (usually within 1-2 business days of transfer).</p>
+        </div>
+      </div>
+    }
+
+    @if (order.paymentMethod === 'net30') {
+      <div class="confirm-card confirm-card--blue">
+        <div class="confirm-card__header"><span>📄 Net 30 Invoice</span></div>
+        <div class="sidebar-help">
+          <p>Credit limit <strong>{{ formatINR(checkout.net30CreditLimit()) }}</strong>. An invoice for
+            <strong>{{ formatINR(orderTotal) }}</strong> will be emailed and is due within 30 days of shipment.</p>
+        </div>
+      </div>
+    }
 
     <!-- Shipping Address -->
     <div class="confirm-card">
@@ -129,7 +159,7 @@
         <span>{{ addr.city }}, {{ addr.state }} {{ addr.zip }}</span>
         <span>{{ addr.country }}</span>
         <div class="shipping-method-small">
-          <span>🚚</span> Standard Ground — estimated Jan 26 – Feb 11
+          <span>🚚</span> {{ order.shippingMethodLabel }}
         </div>
       </div>
     </div>
@@ -138,9 +168,11 @@
     <div class="confirm-card">
       <div class="confirm-card__header"><span>💳 Billing</span></div>
       <div class="sidebar-address">
-        <div class="detail-row"><span>Address</span><span>Same as shipping address</span></div>
-        <div class="detail-row"><span>Terms</span><span>Net 30</span></div>
-        <div class="detail-row"><span>Invoice Due</span><span>Jan 18, 2025</span></div>
+        <div class="detail-row">
+          <span>Address</span>
+          <span>{{ checkout.billingSameAsShipping() ? 'Same as shipping address' : 'Different address' }}</span>
+        </div>
+        <div class="detail-row"><span>Invoice Type</span><span>{{ checkout.invoiceType() === 'gst' ? 'GST Invoice' : 'Standard Invoice' }}</span></div>
       </div>
     </div>
 

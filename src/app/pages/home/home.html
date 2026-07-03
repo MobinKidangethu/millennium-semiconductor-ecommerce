@@ -118,8 +118,8 @@
       <a href="#" class="link-more">All Manufacturers →</a>
     </div>
     <div class="manufacturers-grid">
-      @for (mfr of manufacturers; track mfr) {
-        <div class="manufacturer-card">
+      @for (mfr of manufacturers(); track mfr) {
+        <a [routerLink]="['/products']" [queryParams]="{ manufacturer: mfr }" class="manufacturer-card">
           @if (manufacturerLogo(mfr); as logo) {
             <div class="manufacturer-card__logo manufacturer-card__logo--img"
                  [class.manufacturer-card__logo--dark]="manufacturerLogoDark(mfr)">
@@ -129,7 +129,7 @@
             <div class="manufacturer-card__logo">{{ mfr[0] }}</div>
           }
           <span>{{ mfr }}</span>
-        </div>
+        </a>
       }
     </div>
   </div>

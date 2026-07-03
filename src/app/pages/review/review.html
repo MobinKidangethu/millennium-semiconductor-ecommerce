@@ -23,6 +23,7 @@
                 <span class="chip chip--gray">{{ item.product.package || 'N/A' }}</span>
                 <span class="chip chip--green">{{ item.product.stockStatus }}</span>
               </div>
+              <app-backorder-badge [product]="item.product" [qty]="item.qty"></app-backorder-badge>
             </div>
             <div class="review-item__qty-price">
               {{ item.qty }} × {{ formatINR(item.product.price) }}
@@ -64,7 +65,11 @@
           <div class="est-delivery">
             <strong>Estimated Delivery</strong>
             <span>June 8 – June 13, 2025</span>
-            <small>Note: Non-stock item may ship in 4–6 weeks.</small>
+            @if (cart.hasBackorderedItems()) {
+              <small>Note: Some items exceed available stock and will ship as a separate back-order shipment. See item details above.</small>
+            } @else {
+              <small>Note: Non-stock item may ship in 4–6 weeks.</small>
+            }
           </div>
         </div>
       </div>
@@ -78,28 +83,85 @@
       </div>
       <div class="review-two-col">
         <div class="review-section">
-          <div class="review-section__label">CARD</div>
-          <div class="card-display">
-            <span>💳</span>
-            <div>
-              <strong>Visa ending in 4242</strong>
-              <span>Expires 09/27</span>
-            </div>
-          </div>
+          <div class="review-section__label">{{ paymentLabel(checkout.paymentMethod()) }}</div>
+          @switch (checkout.paymentMethod()) {
+            @case ('upi') {
+              <div class="card-display">
+                <span>📱</span>
+                <div><strong>UPI Payment</strong><span>{{ checkout.upiId() || 'UPI ID on file' }}</span></div>
+              </div>
+            }
+            @case ('wire') {
+              <div class="card-display">
+                <span>🏦</span>
+                <div><strong>Wire Transfer</strong><span class="badge badge--pending">Awaiting Payment</span></div>
+              </div>
+            }
+            @case ('net30') {
+              <div class="card-display">
+                <span>📄</span>
+                <div><strong>Net 30 Account</strong><span>Credit limit {{ formatINR(checkout.net30CreditLimit()) }}</span></div>
+              </div>
+            }
+            @case ('po') {
+              <div class="card-display">
+                <span>📋</span>
+                <div><strong>Purchase Order</strong><span>PO # {{ checkout.poNumber() || '—' }}</span></div>
+              </div>
+            }
+            @default {
+              <div class="card-display">
+                <span>💳</span>
+                <div>
+                  <strong>Card ending in {{ checkout.cardNumber().slice(-4) }}</strong>
+                  <span>Expires {{ checkout.cardExpiry() }}</span>
+                </div>
+              </div>
+            }
+          }
         </div>
         <div class="review-section">
           <div class="review-section__label">BILLING ADDRESS</div>
-          <strong>Robert Chen</strong>
-          <span>Acme Electronics Inc.</span>
-          <span>450 Serra Mall, Bldg 500</span>
-          <span>Stanford, CA 94305</span>
+          <strong>{{ billingAddr.firstName }} {{ billingAddr.lastName }}</strong>
+          @if (billingAddr.company) { <span>{{ billingAddr.company }}</span> }
+          <span>{{ billingAddr.address1 }}</span>
+          <span>{{ billingAddr.city }}, {{ billingAddr.state }} {{ billingAddr.zip }}</span>
         </div>
       </div>
-      @if (true) {
+      @if (checkout.paymentMethod() === 'po' && checkout.poNumber()) {
         <div class="po-display">
-          <strong>PO Number:</strong> PO-2025-0042
+          <strong>PO Number:</strong> {{ checkout.poNumber() }}
+        </div>
+      } @else if (addr.po) {
+        <div class="po-display">
+          <strong>PO Number:</strong> {{ addr.po }}
         </div>
       }
+    </div>
+
+    <!-- Invoice Type -->
+    <div class="checkout-card">
+      <div class="checkout-card__header"><span>🧾 Invoice Type</span></div>
+      <div class="invoice-type-section">
+        <label class="checkbox-label">
+          <input type="radio" name="invoiceType" value="standard"
+                 [checked]="checkout.invoiceType() === 'standard'"
+                 (change)="checkout.invoiceType.set('standard')"/>
+          Standard Invoice
+        </label>
+        <label class="checkbox-label">
+          <input type="radio" name="invoiceType" value="gst"
+                 [checked]="checkout.invoiceType() === 'gst'"
+                 (change)="checkout.invoiceType.set('gst')"/>
+          GST Invoice (Tax Invoice with CGST/SGST breakup)
+        </label>
+        @if (checkout.invoiceType() === 'gst') {
+          <div class="form-group">
+            <label>GSTIN (optional)</label>
+            <input type="text" placeholder="29ABCDE1234F1Z5" [ngModel]="checkout.gstin()" (ngModelChange)="checkout.gstin.set($event)"/>
+          </div>
+        }
+      </div>
     </div>
 
     <!-- Place Order -->
@@ -110,7 +172,7 @@
         <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.
         Non-stock items are subject to manufacturer lead times and cannot be cancelled once submitted.
       </label>
-      <button class="btn-place-order" (click)="placeOrder()">
+      <button class="btn-place-order" [disabled]="paymentStep() !== 'idle'" (click)="placeOrder()">
         🔒 Place Order — {{ formatINR(cart.total()) }}
       </button>
       <div class="secure-note">🔒 Secure 256-bit SSL encrypted transaction</div>
@@ -139,5 +201,81 @@
     </div>
   </div>
 </div>
+
+<!-- ── Dummy Payment Simulation Modal (Credit Card / UPI) ────────────────── -->
+@if (paymentStep() !== 'idle') {
+  <div class="payment-modal-overlay">
+    <div class="payment-modal">
+
+      @if (paymentStep() === 'gateway') {
+        <div class="payment-modal__body payment-modal__body--center">
+          <div class="gateway-spinner"></div>
+          <h3>Redirecting to secure payment gateway…</h3>
+          <p>Please do not close or refresh this window.</p>
+        </div>
+      }
+
+      @if (paymentStep() === 'otp') {
+        <div class="payment-modal__body">
+          <div class="payment-modal__brand">🔒 Secure Payment</div>
+          <h3>Enter One-Time Password</h3>
+          <p>An OTP has been sent to your registered mobile number ending in <strong>••43</strong> for
+            card ending in <strong>{{ checkout.cardNumber().slice(-4) }}</strong>.</p>
+
+          <div class="otp-boxes">
+            @for (digit of otpDigits(); track $index) {
+              <input
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                class="otp-box"
+                [class.otp-box--error]="otpError()"
+                [value]="digit"
+                (input)="onOtpInput($event, $index)"
+                (keydown)="onOtpKeydown($event)"
+              />
+            }
+          </div>
+          @if (otpError()) {
+            <div class="otp-error">Please enter the complete 6-digit OTP.</div>
+          }
+          <div class="otp-hint">Demo mode — enter any 6 digits to continue.</div>
+
+          <button class="btn-place-order" [disabled]="!otpComplete" (click)="submitOtp()">
+            Verify &amp; Pay {{ formatINR(cart.total()) }}
+          </button>
+          <button class="btn-modal-cancel" (click)="cancelPayment()">Cancel Payment</button>
+        </div>
+      }
+
+      @if (paymentStep() === 'upi-waiting') {
+        <div class="payment-modal__body payment-modal__body--center">
+          <div class="upi-pulse">📱</div>
+          <h3>Approve the payment on your UPI app</h3>
+          <p>We've sent a collect request for <strong>{{ formatINR(cart.total()) }}</strong> to
+            <strong>{{ checkout.upiId() || 'your UPI ID' }}</strong>. Open your UPI app to approve.</p>
+          <div class="waiting-dots"><span></span><span></span><span></span></div>
+          <button class="btn-modal-cancel" (click)="cancelPayment()">Cancel Payment</button>
+        </div>
+      }
+
+      @if (paymentStep() === 'verifying') {
+        <div class="payment-modal__body payment-modal__body--center">
+          <div class="gateway-spinner"></div>
+          <h3>Verifying payment…</h3>
+        </div>
+      }
+
+      @if (paymentStep() === 'success') {
+        <div class="payment-modal__body payment-modal__body--center">
+          <div class="success-check">✓</div>
+          <h3>Payment Successful!</h3>
+          <p>{{ formatINR(cart.total()) }} received. Redirecting to your order confirmation…</p>
+        </div>
+      }
+
+    </div>
+  </div>
+}
 
 <app-footer></app-footer>

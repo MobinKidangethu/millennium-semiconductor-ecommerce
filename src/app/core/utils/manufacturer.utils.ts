@@ -11,8 +11,30 @@ const MANUFACTURER_LOGOS: Record<string, ManufacturerLogo> = {
   'analog devices': { file: 'analog-devices.svg' },
   'microchip': { file: 'microchip.png', dark: true },
   'renesas': { file: 'renesas.svg', dark: true },
-  'vishay': { file: 'vishay.png' }
+  'vishay': { file: 'vishay.png' },
+  'ixys': { file: 'ixys.webp' },
+  'littelfuse': { file: 'littlefuse.webp' },
+  'toshiba': { file: 'toshiba.jpg' },
+  'qorvo': { file: 'qorvo.png' }
 };
+
+// Every brand shown on the site — including ones with no products in the
+// catalog yet. Selecting one of the product-less brands should still route
+// to the product listing and show its empty state.
+export const ALL_MANUFACTURERS: string[] = [
+  'Texas Instruments',
+  'STMicroelectronics',
+  'NXP',
+  'Infineon Technologies',
+  'Analog Devices',
+  'Microchip Technology',
+  'Renesas Electronics',
+  'Vishay',
+  'IXYS',
+  'Littelfuse',
+  'Toshiba',
+  'Qorvo'
+];
 
 function findLogo(manufacturer: string): ManufacturerLogo | null {
   const name = manufacturer.toLowerCase();
@@ -31,4 +53,12 @@ export function manufacturerLogoPath(manufacturer: string): string | null {
 
 export function manufacturerLogoIsDark(manufacturer: string): boolean {
   return !!findLogo(manufacturer)?.dark;
+}
+
+// Loose match used to line up a catalog manufacturer string (e.g. "Vishay
+// Semiconductors") with the canonical brand name shown in the UI ("Vishay").
+export function manufacturerNameMatches(productManufacturer: string, brandName: string): boolean {
+  const a = productManufacturer.toLowerCase();
+  const b = brandName.toLowerCase();
+  return a.includes(b) || b.includes(a);
 }

@@ -42,66 +42,7 @@
     <!-- New Address Form -->
     <div class="checkout-card">
       <div class="checkout-card__header"><span>📝 Enter a New Address</span></div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label>First Name *</label>
-          <input type="text" placeholder="Robert"/>
-        </div>
-        <div class="form-group">
-          <label>Last Name *</label>
-          <input type="text" placeholder="Chen"/>
-        </div>
-        <div class="form-group form-group--full">
-          <label>Company / Organization</label>
-          <input type="text" placeholder="Acme Electronics Inc."/>
-        </div>
-        <div class="form-group form-group--full">
-          <label>Address Line 1 *</label>
-          <input type="text" placeholder="Street address"/>
-        </div>
-        <div class="form-group form-group--full">
-          <label>Address Line 2</label>
-          <input type="text" placeholder="Suite, floor, unit..."/>
-        </div>
-        <div class="form-group">
-          <label>City *</label>
-          <input type="text" placeholder="San Francisco"/>
-        </div>
-        <div class="form-group">
-          <label>ZIP / Postal Code *</label>
-          <input type="text" placeholder="94105"/>
-        </div>
-        <div class="form-group">
-          <label>State / Province *</label>
-          <select>
-            <option>California</option>
-            <option>New York</option>
-            <option>Texas</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Country *</label>
-          <select>
-            <option>United States</option>
-            <option>India</option>
-            <option>United Kingdom</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input type="text" placeholder="+1 (415) 555-0192"/>
-        </div>
-        <div class="form-group">
-          <label>PO Number (optional)</label>
-          <input type="text" placeholder="PO-2025-021"/>
-        </div>
-        <div class="form-group form-group--full">
-          <label class="checkbox-label">
-            <input type="checkbox"/>
-            Save this address to my account
-          </label>
-        </div>
-      </div>
+      <app-address-form saveLabel="Save Address" [showDefaultToggle]="true" (save)="onSaveNewAddress($event)"></app-address-form>
     </div>
 
     <!-- Shipping Method -->

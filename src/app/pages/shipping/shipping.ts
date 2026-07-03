@@ -6,12 +6,14 @@ import { CheckoutService } from '../../core/services/checkout.service';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
 import { CheckoutStepper } from '../../shared/checkout-stepper/checkout-stepper';
+import { AddressForm } from '../../shared/address-form/address-form';
+import { Address } from '../../core/models/product.model';
 import { inr } from '../../core/utils/price.utils';
 
 @Component({
   selector: 'app-shipping',
   standalone: true,
-  imports: [RouterLink, FormsModule, Header, Footer, CheckoutStepper],
+  imports: [RouterLink, FormsModule, Header, Footer, CheckoutStepper, AddressForm],
   templateUrl: './shipping.html',
   styleUrls: ['./shipping.scss']
 })
@@ -22,13 +24,6 @@ export class Shipping {
 
   selectedAddress = signal(0);
   selectedMethod  = signal('standard');
-  saveAddress     = signal(false);
-
-  newAddress = signal({
-    firstName: '', lastName: '', company: '', address1: '', address2: '',
-    city: '', zip: '', state: 'Maharashtra', country: 'India',
-    phone: '', po: ''
-  });
 
   continueToPayment() {
     this.checkout.shippingAddress.set(this.checkout.savedAddresses()[this.selectedAddress()]);
@@ -36,6 +31,11 @@ export class Shipping {
       this.checkout.shippingMethods.find(m => m.id === this.selectedMethod())!
     );
     this.router.navigate(['/checkout/payment']);
+  }
+
+  onSaveNewAddress(event: { address: Address; setDefault: boolean }) {
+    this.checkout.addSavedAddress(event.address, event.setDefault);
+    this.selectedAddress.set(this.checkout.savedAddresses().length - 1);
   }
 
   formatINR(amount: number): string { return inr(amount); }

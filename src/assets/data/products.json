@@ -23,7 +23,10 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp",
+    "tags": [
+      "new"
+    ]
   },
   {
     "id": 2,
@@ -231,7 +234,10 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/3KDFN15CA-M3H.webp"
+    "image": "assets/images/products/3KDFN15CA-M3H.webp",
+    "tags": [
+      "new"
+    ]
   },
   {
     "id": 10,
@@ -439,7 +445,10 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp",
+    "tags": [
+      "new"
+    ]
   },
   {
     "id": 18,
@@ -673,7 +682,11 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/2KDFN27CA-M3H.webp"
+    "image": "assets/images/products/2KDFN27CA-M3H.webp",
+    "tags": [
+      "new",
+      "featured"
+    ]
   },
   {
     "id": 27,
@@ -881,7 +894,12 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp",
+    "tags": [
+      "new",
+      "best-seller",
+      "featured"
+    ]
   },
   {
     "id": 35,
@@ -1089,7 +1107,11 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/2KDFN27CA-M3H.webp"
+    "image": "assets/images/products/2KDFN27CA-M3H.webp",
+    "tags": [
+      "new",
+      "best-seller"
+    ]
   },
   {
     "id": 43,
@@ -1323,7 +1345,10 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/BZG03C62-HM3_A-08.webp"
+    "image": "assets/images/products/BZG03C62-HM3_A-08.webp",
+    "tags": [
+      "new"
+    ]
   },
   {
     "id": 52,
@@ -1531,7 +1556,12 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/3KDFN15CA-M3H.webp"
+    "image": "assets/images/products/3KDFN15CA-M3H.webp",
+    "tags": [
+      "new",
+      "best-seller",
+      "featured"
+    ]
   },
   {
     "id": 60,
@@ -1739,7 +1769,11 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/SS8PH102-M3I.webp"
+    "image": "assets/images/products/SS8PH102-M3I.webp",
+    "tags": [
+      "new",
+      "best-seller"
+    ]
   },
   {
     "id": 68,
@@ -1973,7 +2007,10 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/3KDFN15CA-M3H.webp"
+    "image": "assets/images/products/3KDFN15CA-M3H.webp",
+    "tags": [
+      "new"
+    ]
   },
   {
     "id": 77,
@@ -2181,7 +2218,11 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp"
+    "image": "assets/images/products/AIGBG15N120S7ATMA1.webp",
+    "tags": [
+      "new",
+      "featured"
+    ]
   },
   {
     "id": 85,
@@ -2389,7 +2430,11 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/2KDFN27CA-M3H.webp"
+    "image": "assets/images/products/2KDFN27CA-M3H.webp",
+    "tags": [
+      "new",
+      "featured"
+    ]
   },
   {
     "id": 93,
@@ -2623,7 +2668,10 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/2KDFN27CA-M3H.webp"
+    "image": "assets/images/products/2KDFN27CA-M3H.webp",
+    "tags": [
+      "new"
+    ]
   },
   {
     "id": 102,
@@ -2831,7 +2879,11 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/SE50124-M3I.webp"
+    "image": "assets/images/products/SE50124-M3I.webp",
+    "tags": [
+      "new",
+      "featured"
+    ]
   },
   {
     "id": 110,
@@ -3039,7 +3091,11 @@
     "quantity": 1,
     "category": "Semiconductors",
     "stockType": "Stock",
-    "image": "assets/images/products/2KDFN27CA-M3H.webp"
+    "image": "assets/images/products/2KDFN27CA-M3H.webp",
+    "tags": [
+      "new",
+      "best-seller"
+    ]
   },
   {
     "id": 118,

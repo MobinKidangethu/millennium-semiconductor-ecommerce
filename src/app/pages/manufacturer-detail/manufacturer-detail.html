@@ -1,0 +1,93 @@
+<app-header></app-header>
+
+<div class="page-container">
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    <a routerLink="/">Home</a>
+    <span class="breadcrumb__sep">›</span>
+    <span>{{ name() }}</span>
+  </nav>
+
+  <!-- ── Manufacturer Profile ─────────────────────────────────────────────── -->
+  <div class="mfr-profile">
+    <div class="mfr-profile__logo" [class.mfr-profile__logo--dark]="logoDark">
+      @if (logo; as logoSrc) {
+        <img [src]="logoSrc" [alt]="name()" />
+      } @else {
+        <span>{{ name()[0] }}</span>
+      }
+    </div>
+    <div class="mfr-profile__body">
+      <h1>{{ name() }}</h1>
+      @if (info(); as i) {
+        <p class="mfr-profile__desc">{{ i.description }}</p>
+        <div class="mfr-facts">
+          <div class="mfr-facts__item"><span>Founded</span><strong>{{ i.founded }}</strong></div>
+          <div class="mfr-facts__item"><span>Headquarters</span><strong>{{ i.headquarters }}</strong></div>
+          <div class="mfr-facts__item"><span>Employees</span><strong>{{ i.employees }}</strong></div>
+          <div class="mfr-facts__item">
+            <span>Website</span>
+            <a [href]="i.website" target="_blank" rel="noopener" class="mfr-facts__link">{{ i.website }} ↗</a>
+          </div>
+        </div>
+      } @else {
+        <p class="mfr-profile__desc">No additional details are available for this manufacturer yet.</p>
+      }
+    </div>
+  </div>
+
+  <!-- ── Products from this manufacturer ─────────────────────────────────── -->
+  <div class="mfr-products">
+    <div class="mfr-products__header">
+      <h2>Products from {{ name() }}</h2>
+      @if (products().length > 0) {
+        <a [routerLink]="['/products']" [queryParams]="{ manufacturer: name() }" class="link-more">View All in Product Catalog →</a>
+      }
+    </div>
+
+    @if (products().length === 0) {
+      <div class="no-results">
+        <div class="no-results__icon">🔍</div>
+        <h3>No products currently listed</h3>
+        <p>We don't carry any {{ name() }} parts in stock right now. Check back soon, or browse other manufacturers.</p>
+        <a routerLink="/products" class="btn-clear-filters">Browse All Products</a>
+      </div>
+    } @else {
+      <div class="products-grid">
+        @for (product of products(); track product.id) {
+          <div class="product-card">
+            <a [routerLink]="['/product', product.id]" class="product-card__img-link">
+              <div class="product-card__img">
+                <img width="84" height="84" [src]="product.image" [alt]="product.title"
+                     (error)="onImgError($event, product.category)" />
+              </div>
+            </a>
+            <div class="product-card__body">
+              <span class="product-card__mfr">{{ product.manufacturer }}</span>
+              <a [routerLink]="['/product', product.id]" class="product-card__title">{{ product.title }}</a>
+              <span class="product-card__type">{{ product.productType }}</span>
+              <div class="product-card__stock">
+                @if (product.availability > 0) {
+                  <span class="chip chip--green">{{ product.availability.toLocaleString() }} in stock</span>
+                } @else {
+                  <span class="chip chip--orange">{{ product.stockStatus }}</span>
+                }
+              </div>
+              <div class="product-card__footer">
+                <span class="product-card__price">{{ formatPrice(product) }}</span>
+                <button class="btn-add" (click)="addToCart(product)"
+                        [class.btn-add--done]="addedId() === product.id">
+                  @if (addedId() === product.id) { ✓ } @else { + Add }
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+</div>
+
+<app-footer></app-footer>

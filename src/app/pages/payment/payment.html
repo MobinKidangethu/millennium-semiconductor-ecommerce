@@ -9,9 +9,13 @@
     <div class="payment-methods">
       @for (method of paymentMethods; track method.id) {
         <div class="payment-method-tab" [class.active]="activePayment() === method.id"
-             (click)="activePayment.set(method.id)">
+             [class.disabled]="method.id === 'upi' && !upiEligible()"
+             (click)="selectPayment(method.id)">
           <div class="pmt-icon">{{ method.icon }}</div>
           <div class="pmt-label">{{ method.label }}</div>
+          @if (method.id === 'upi' && !upiEligible()) {
+            <div class="pmt-note">Over ₹1,00,000 limit</div>
+          }
           <div class="pmt-radio">
             <input type="radio" [checked]="activePayment() === method.id"/>
           </div>
@@ -34,23 +38,23 @@
         <div class="form-grid">
           <div class="form-group form-group--full">
             <label>Cardholder Name *</label>
-            <input type="text" placeholder="Robert Chen" value="Robert Chen"/>
+            <input type="text" placeholder="Robert Chen" [ngModel]="checkout.cardHolder()" (ngModelChange)="checkout.cardHolder.set($event)"/>
           </div>
           <div class="form-group form-group--full">
             <label>Card Number *</label>
             <div class="card-number-input">
-              <input type="text" placeholder="•••• •••• •••• ••••" value="•••• •••• •••• 4242"/>
+              <input type="text" placeholder="•••• •••• •••• ••••" [ngModel]="checkout.cardNumber()" (ngModelChange)="checkout.cardNumber.set($event)"/>
               <span class="card-number-icon">💳</span>
             </div>
           </div>
           <div class="form-group">
             <label>Expiry Date *</label>
-            <input type="text" placeholder="MM / YY" value="09 / 27"/>
+            <input type="text" placeholder="MM / YY" [ngModel]="checkout.cardExpiry()" (ngModelChange)="checkout.cardExpiry.set($event)"/>
           </div>
           <div class="form-group">
             <label>CVV / Security Code *</label>
             <div class="card-number-input">
-              <input type="password" placeholder="•••" value="..."/>
+              <input type="password" placeholder="•••"/>
               <span class="card-number-icon">🔒</span>
             </div>
           </div>
@@ -62,56 +66,197 @@
           </div>
         </div>
       </div>
+    }
 
-      <!-- Billing Address -->
+    @if (activePayment() === 'upi') {
       <div class="checkout-card">
-        <div class="checkout-card__header"><span>📍 Billing Address</span></div>
-        <div class="billing-section">
-          <label class="checkbox-label billing-same">
-            <input type="checkbox" [checked]="sameAsShipping()"
-                   (change)="sameAsShipping.set(!sameAsShipping())"/>
-            Same as shipping address
-          </label>
-          @if (sameAsShipping()) {
-            <div class="billing-addr">
-              <span>📍</span>
-              <div>
-                <strong>Robert Chen — Acme Electronics Inc.</strong>
-                <span>450 Serra Mall, Bldg 500</span>
-                <span>Stanford, CA 94305</span>
-                <span>United States</span>
-                <a href="#">Change</a>
-              </div>
-            </div>
-          }
+        <div class="checkout-card__header"><span>📱 UPI Payment</span></div>
+        <div class="form-grid">
+          <div class="form-group form-group--full">
+            <label>UPI ID *</label>
+            <input type="text" placeholder="yourname@upi" [ngModel]="checkout.upiId()" (ngModelChange)="checkout.upiId.set($event)"/>
+          </div>
+        </div>
+        <div class="info-box">
+          <p>UPI payments are accepted for orders up to <strong>₹1,00,000</strong>. You'll receive a
+            collect request on your UPI app to approve after placing the order.</p>
         </div>
       </div>
     }
 
+    <!-- Billing Address (needed for invoicing regardless of payment method) -->
+      <div class="checkout-card">
+        <div class="checkout-card__header"><span>📍 Billing Address</span></div>
+        <div class="billing-section">
+          <label class="checkbox-label billing-same">
+            <input type="checkbox" [checked]="checkout.billingSameAsShipping()"
+                   (change)="toggleSameAsShipping()"/>
+            Same as shipping address
+          </label>
+          @if (checkout.billingSameAsShipping()) {
+            <div class="billing-addr">
+              <span>📍</span>
+              <div>
+                <strong>{{ billingAddr.firstName }} {{ billingAddr.lastName }}</strong>
+                @if (billingAddr.company) { <span>{{ billingAddr.company }}</span> }
+                <span>{{ billingAddr.address1 }}</span>
+                <span>{{ billingAddr.city }}, {{ billingAddr.state }} {{ billingAddr.zip }}</span>
+                <span>{{ billingAddr.country }}</span>
+              </div>
+            </div>
+          } @else {
+            <app-address-form saveLabel="Save Billing Address" (save)="onSaveBillingAddress($event)"></app-address-form>
+            @if (checkout.billingAddress(); as saved) {
+              <div class="billing-addr">
+                <span>📍</span>
+                <div>
+                  <strong>{{ saved.firstName }} {{ saved.lastName }}</strong>
+                  @if (saved.company) { <span>{{ saved.company }}</span> }
+                  <span>{{ saved.address1 }}</span>
+                  <span>{{ saved.city }}, {{ saved.state }} {{ saved.zip }}</span>
+                  <span>{{ saved.country }}</span>
+                </div>
+              </div>
+            }
+          }
+        </div>
+      </div>
+
     @if (activePayment() === 'wire') {
       <div class="checkout-card">
         <div class="checkout-card__header"><span>🏦 Wire Transfer Details</span></div>
-        <div class="info-box">
-          <p>Wire transfer instructions will be sent to your registered email after order placement.
-            Payment must be received within <strong>5 business days</strong>.</p>
-          <p>For assistance, contact <a href="#">sales&#64;millenniumsemi.com</a></p>
+        <div class="wire-details">
+          <p class="wire-details__intro">Send payment for this order using the bank details below. Orders ship once
+            payment is confirmed — please allow <strong>5 business days</strong> for us to receive the transfer.</p>
+          <div class="wire-grid">
+            <div class="wire-row">
+              <span>Beneficiary Name</span>
+              <div><strong>Millennium Semiconductors India Pvt. Ltd.</strong>
+                <button type="button" class="btn-copy" (click)="copyWireDetail('Millennium Semiconductors India Pvt. Ltd.')">Copy</button></div>
+            </div>
+            <div class="wire-row">
+              <span>Bank Name</span>
+              <div><strong>HDFC Bank Ltd.</strong>
+                <button type="button" class="btn-copy" (click)="copyWireDetail('HDFC Bank Ltd.')">Copy</button></div>
+            </div>
+            <div class="wire-row">
+              <span>Account Number</span>
+              <div><strong>50200012345678</strong>
+                <button type="button" class="btn-copy" (click)="copyWireDetail('50200012345678')">Copy</button></div>
+            </div>
+            <div class="wire-row">
+              <span>IFSC Code</span>
+              <div><strong>HDFC0000123</strong>
+                <button type="button" class="btn-copy" (click)="copyWireDetail('HDFC0000123')">Copy</button></div>
+            </div>
+            <div class="wire-row">
+              <span>SWIFT Code (International)</span>
+              <div><strong>HDFCINBB</strong>
+                <button type="button" class="btn-copy" (click)="copyWireDetail('HDFCINBB')">Copy</button></div>
+            </div>
+            <div class="wire-row">
+              <span>Branch</span>
+              <div><strong>MG Road, Bengaluru, Karnataka</strong></div>
+            </div>
+            <div class="wire-row">
+              <span>Payment Reference</span>
+              <div><strong>Your order number (shown after checkout)</strong></div>
+            </div>
+          </div>
+          <label class="checkbox-label wire-ack">
+            <input type="checkbox" [checked]="checkout.wireAcknowledged()"
+                   (change)="checkout.wireAcknowledged.set(!checkout.wireAcknowledged())"/>
+            I will initiate this wire transfer within 5 business days using the details above.
+          </label>
         </div>
       </div>
     }
 
     @if (activePayment() === 'net30') {
       <div class="checkout-card">
-        <div class="checkout-card__header"><span>📄 Net 30 Terms</span></div>
-        <div class="info-box">
-          <p>Net 30 terms are available for pre-approved accounts. An invoice will be generated
-            and payment is due within <strong>30 days</strong> of shipment.</p>
+        <div class="checkout-card__header"><span>📄 Net 30 Account Application</span></div>
+        @if (!checkout.net30Applied()) {
+          <div class="form-grid">
+            <div class="form-group form-group--full">
+              <label>Company Legal Name *</label>
+              <input type="text" placeholder="Acme Electronics Pvt. Ltd." [ngModel]="checkout.net30CompanyName()" (ngModelChange)="checkout.net30CompanyName.set($event)"/>
+            </div>
+            <div class="form-group">
+              <label>Tax ID / GSTIN *</label>
+              <input type="text" placeholder="29ABCDE1234F1Z5" [ngModel]="checkout.net30TaxId()" (ngModelChange)="checkout.net30TaxId.set($event)"/>
+            </div>
+            <div class="form-group">
+              <label>Authorized Signer *</label>
+              <input type="text" placeholder="Full name" [ngModel]="checkout.net30AuthorizedSigner()" (ngModelChange)="checkout.net30AuthorizedSigner.set($event)"/>
+            </div>
+            <div class="form-group form-group--full">
+              <label>Estimated Monthly PO Volume</label>
+              <select class="select-input" [ngModel]="checkout.net30MonthlyVolume()" (ngModelChange)="checkout.net30MonthlyVolume.set($event)">
+                @for (opt of net30VolumeOptions; track opt) {
+                  <option [value]="opt">{{ opt }}</option>
+                }
+              </select>
+            </div>
+          </div>
+          <div class="info-box info-box--tight">
+            <p>Net 30 terms let pre-approved accounts pay by invoice, due within <strong>30 days</strong> of shipment.
+              Submitting this form runs a quick credit check for this order.</p>
+          </div>
+          <div class="net30-apply">
+            <button type="button" class="btn-apply" [disabled]="net30Applying() || !checkout.net30CompanyName() || !checkout.net30AuthorizedSigner()" (click)="applyNet30()">
+              @if (net30Applying()) { <span class="spinner"></span> Checking credit... } @else { Apply for Net 30 Terms }
+            </button>
+          </div>
+        } @else {
+          <div class="net30-approved">
+            <div class="net30-approved__icon">✓</div>
+            <div>
+              <strong>Pre-approved for Net 30 Terms</strong>
+              <p>Credit limit: <strong>{{ formatINR(checkout.net30CreditLimit()) }}</strong> — an invoice will be generated
+                and payment is due within 30 days of shipment. Final approval is subject to review.</p>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    @if (activePayment() === 'po') {
+      <div class="checkout-card">
+        <div class="checkout-card__header"><span>📋 Purchase Order Details</span></div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>PO Number *</label>
+            <input type="text" placeholder="PO-2026-0231" [ngModel]="checkout.poNumber()" (ngModelChange)="checkout.poNumber.set($event)"/>
+          </div>
+          <div class="form-group">
+            <label>Authorized By *</label>
+            <input type="text" placeholder="Full name" [ngModel]="checkout.poAuthorizedBy()" (ngModelChange)="checkout.poAuthorizedBy.set($event)"/>
+          </div>
+          <div class="form-group form-group--full">
+            <label>Upload PO Document (optional)</label>
+            <div class="po-upload">
+              <input type="file" id="poFile" class="po-upload__input" (change)="onPoFileSelected($event)"/>
+              <label for="poFile" class="po-upload__btn">📎 Choose File</label>
+              <span class="po-upload__name">{{ checkout.poFileName() || 'No file chosen' }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="info-box info-box--tight">
+          <p>Order Total: <strong>{{ formatINR(cart.total()) }}</strong> — please confirm this matches the amount authorized on your purchase order.</p>
+        </div>
+        <div class="po-confirm">
+          <label class="checkbox-label">
+            <input type="checkbox" [checked]="checkout.poAmountConfirmed()"
+                   (change)="checkout.poAmountConfirmed.set(!checkout.poAmountConfirmed())"/>
+            This PO has been authorized by my organization for the amount above.
+          </label>
         </div>
       </div>
     }
 
     <div class="checkout-nav">
       <a routerLink="/checkout/shipping" class="btn-back">← Back to Shipping</a>
-      <button class="btn-continue" (click)="reviewOrder()">Review Order →</button>
+      <button class="btn-continue" [disabled]="!canContinue" (click)="reviewOrder()">Review Order →</button>
     </div>
   </div>
 
@@ -129,7 +274,7 @@
         }
         <div class="sidebar-ship-to">
           <span>🚚 Ship to</span>
-          <span>Robert Chen, Acme Electronics, 450 Serra Mall — Stanford CA 94305</span>
+          <span>{{ addr.firstName }} {{ addr.lastName }}, {{ addr.city }} {{ addr.zip }}</span>
           <span class="free">Standard — FREE</span>
         </div>
       </div>

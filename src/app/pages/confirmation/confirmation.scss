@@ -477,7 +477,8 @@
 
 }
 
-.confirm-actions button{
+.confirm-actions button,
+.confirm-actions a{
 
   height:48px;
 
@@ -492,6 +493,16 @@
   font-weight:600;
 
   transition:.25s;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-decoration:none;
+
+  box-sizing:border-box;
 
 }
 

@@ -9,6 +9,7 @@ import { inr } from '../../core/utils/price.utils';
 import { categoryIconPath, iconPath } from '../../core/utils/icon.utils';
 import { ThemeService, ThemeName } from '../../core/services/theme.service';
 import { AuthService } from '../../core/services/auth.service';
+import { ALL_MANUFACTURERS, manufacturerLogoPath, manufacturerLogoIsDark } from '../../core/utils/manufacturer.utils';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,8 @@ export class Header implements OnDestroy {
   private el = inject(ElementRef);
 
   showAccountMenu = signal(false);
+  showManufacturersMenu = signal(false);
+  readonly manufacturers = ALL_MANUFACTURERS;
 
   readonly themes: { id: ThemeName; label: string; swatch: string }[] = [
     { id: 'maroon', label: 'Maroon', swatch: '#70284e' },
@@ -140,12 +143,26 @@ export class Header implements OnDestroy {
     if (!this.el.nativeElement.contains(event.target)) {
       this.closeDropdown();
       this.showAccountMenu.set(false);
+      this.showManufacturersMenu.set(false);
     }
   }
 
   toggleAccountMenu(event: MouseEvent) {
     event.stopPropagation();
     this.showAccountMenu.update(v => !v);
+  }
+
+  toggleManufacturersMenu(event: MouseEvent) {
+    event.stopPropagation();
+    this.showManufacturersMenu.update(v => !v);
+  }
+
+  manufacturerLogo(name: string): string | null {
+    return manufacturerLogoPath(name);
+  }
+
+  manufacturerLogoDark(name: string): boolean {
+    return manufacturerLogoIsDark(name);
   }
 
   logout() {

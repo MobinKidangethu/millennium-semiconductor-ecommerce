@@ -6,6 +6,7 @@ import { CheckoutService } from '../../core/services/checkout.service';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
 import { CheckoutStepper } from '../../shared/checkout-stepper/checkout-stepper';
+import { BackorderBadge } from '../../shared/backorder-badge/backorder-badge';
 import { inr } from '../../core/utils/price.utils';
 import { categoryIconPath, iconPath } from '../../core/utils/icon.utils';
 import { ThemeService } from '../../core/services/theme.service';
@@ -19,7 +20,7 @@ interface InvoiceOption {
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [RouterLink, FormsModule, Header, Footer, CheckoutStepper],
+  imports: [RouterLink, FormsModule, Header, Footer, CheckoutStepper, BackorderBadge],
   templateUrl: './cart.html',
   styleUrls: ['./cart.scss']
 })

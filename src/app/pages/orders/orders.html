@@ -1,0 +1,85 @@
+<app-header></app-header>
+
+<div class="orders-page">
+  @if (!auth.currentUser()) {
+    <div class="orders-empty">
+      <h1>My Orders</h1>
+      <p>Sign in to view your order history.</p>
+      <a routerLink="/login" class="btn-primary">Sign In</a>
+    </div>
+  } @else if (selectedOrder; as order) {
+    <a routerLink="/orders" class="btn-back">← Back to Orders</a>
+    <div class="orders-detail">
+      <div class="orders-detail__header">
+        <h1>Order #{{ order.orderNumber }}</h1>
+        <span class="status-badge">{{ order.status }}</span>
+      </div>
+      <p class="order-meta">Placed on {{ order.placedAt | date:'MMMM d, y \'·\' h:mm a' }}</p>
+
+      <div class="status-stepper">
+        @for (stage of statusStages; track stage; let i = $index) {
+          <div class="status-step" [class.done]="i <= statusStageIndex(order.status)">
+            <div class="status-step__dot"></div>
+            <span>{{ stage }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="order-card">
+        <h2>Items</h2>
+        @for (item of order.items; track item.product.id) {
+          <div class="order-item-row">
+            <span class="order-item-row__name">{{ item.product.title }}</span>
+            <span>× {{ item.qty }}</span>
+            <span>{{ formatINR(item.product.price * item.qty) }}</span>
+          </div>
+        }
+        <div class="order-item-row order-item-row--total">
+          <span>Order Total</span><span></span><span>{{ formatINR(order.total) }}</span>
+        </div>
+      </div>
+
+      <div class="order-two-col">
+        <div class="order-card">
+          <h2>Shipping Address</h2>
+          <p><strong>{{ order.shippingAddress.firstName }} {{ order.shippingAddress.lastName }}</strong></p>
+          @if (order.shippingAddress.company) { <p>{{ order.shippingAddress.company }}</p> }
+          <p>{{ order.shippingAddress.address1 }}</p>
+          @if (order.shippingAddress.address2) { <p>{{ order.shippingAddress.address2 }}</p> }
+          <p>{{ order.shippingAddress.city }}, {{ order.shippingAddress.state }} {{ order.shippingAddress.zip }}</p>
+          <p>{{ order.shippingAddress.country }}</p>
+        </div>
+        <div class="order-card">
+          <h2>Payment &amp; Invoice</h2>
+          <p>Method: {{ order.paymentMethod }}</p>
+          <p>{{ order.invoiceType === 'gst' ? 'GST Invoice' : 'Standard Invoice' }}</p>
+          <p>Shipping: {{ order.shippingMethodLabel }}</p>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <h1>My Orders</h1>
+    @if (orders().length === 0) {
+      <div class="orders-empty">
+        <p>You haven't placed any orders yet.</p>
+        <a routerLink="/products" class="btn-primary">Start Shopping</a>
+      </div>
+    } @else {
+      <div class="orders-list">
+        @for (order of orders(); track order.orderNumber) {
+          <a [routerLink]="['/orders', order.orderNumber]" class="order-row">
+            <div class="order-row__main">
+              <strong>#{{ order.orderNumber }}</strong>
+              <span>{{ order.placedAt | date:'MMM d, y' }}</span>
+            </div>
+            <span class="status-badge">{{ order.status }}</span>
+            <span class="order-row__items">{{ order.items.length }} items</span>
+            <span class="order-row__total">{{ formatINR(order.total) }}</span>
+          </a>
+        }
+      </div>
+    }
+  }
+</div>
+
+<app-footer></app-footer>

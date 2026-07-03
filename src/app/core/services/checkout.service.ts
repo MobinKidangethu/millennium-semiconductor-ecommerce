@@ -22,19 +22,6 @@ export class CheckoutService {
       city: 'Bengaluru', zip: '560087', state: 'Karnataka',
       country: 'India', phone: '', po: '',
       isDefault: true
-    },
-    {
-      firstName: 'Robert', lastName: 'Chen', company: 'Acme Electronics Inc.',
-      address1: '450 Serra Mall, Bldg 500', address2: '',
-      city: 'Stanford', zip: '94305', state: 'California',
-      country: 'United States', phone: '+1 (415) 555-0199', po: '',
-      isDefault: false
-    },
-    {
-      firstName: 'Tommy', lastName: 'Oliver', company: '',
-      address1: '1234 Mountain Pass', address2: '',
-      city: 'Mountain View', zip: '94043', state: 'California',
-      country: 'United States', phone: '', po: '', isDefault: false
     }
   ]);
 
@@ -48,11 +35,42 @@ export class CheckoutService {
     { id: 'overnight', label: 'Overnight (Next Business Day)', days: 'Next Business Day',    price: 3507 }
   ];
 
+  billingSameAsShipping = signal<boolean>(true);
+  billingAddress = signal<Address | null>(null);
+
   invoiceType = signal<'standard' | 'gst'>('gst');
+  gstin = signal<string>('');
 
   paymentMethod = signal<string>('credit');
-  cardHolder = signal<string>('Robert Chen');
+  cardHolder = signal<string>('');
   cardNumber = signal<string>('•••• •••• •••• 4242');
   cardExpiry = signal<string>('09 / 27');
   orderNumber = signal<string>('NXC-2025-084712');
+
+  // UPI
+  upiId = signal<string>('');
+
+  // Wire transfer
+  wireAcknowledged = signal<boolean>(false);
+
+  // Net 30
+  net30CompanyName = signal<string>('');
+  net30TaxId = signal<string>('');
+  net30MonthlyVolume = signal<string>('₹1,00,000 – ₹5,00,000');
+  net30AuthorizedSigner = signal<string>('');
+  net30Applied = signal<boolean>(false);
+  net30CreditLimit = signal<number>(0);
+
+  // Purchase Order
+  poNumber = signal<string>('');
+  poAuthorizedBy = signal<string>('');
+  poFileName = signal<string>('');
+  poAmountConfirmed = signal<boolean>(false);
+
+  addSavedAddress(address: Address, setDefault: boolean) {
+    this.savedAddresses.update(addresses => {
+      const next = setDefault ? addresses.map(a => ({ ...a, isDefault: false })) : addresses;
+      return [...next, { ...address, isDefault: setDefault }];
+    });
+  }
 }

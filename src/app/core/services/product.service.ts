@@ -34,7 +34,7 @@ export class ProductService {
   }
 
   getManufacturers(): string[] {
-    return [...new Set(this.products.map(p => p.manufacturer))].slice(0, 8);
+    return [...new Set(this.products.map(p => p.manufacturer))].sort();
   }
 
   getCategories(): string[] {

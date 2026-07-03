@@ -41,6 +41,7 @@
                     {{ item.product.availability > 0 ? 'In Stock' : item.product.stockStatus }}
                   </span>
                 </div>
+                <app-backorder-badge [product]="item.product" [qty]="item.qty"></app-backorder-badge>
               </td>
               <td class="cart-table__price">
                 <div>{{ formatINR(item.product.price) }}</div>
@@ -138,6 +139,11 @@
         <span>📋</span> Order Summary
       </div>
       <div class="order-summary__body">
+        @if (cart.hasBackorderedItems()) {
+          <div class="backorder-notice">
+            ⚠ Some items exceed available stock — your order will ship in multiple shipments.
+          </div>
+        }
         <div class="summary-row">
           <span>Subtotal</span>
           <span>{{ formatINR(cart.subtotal()) }}</span>

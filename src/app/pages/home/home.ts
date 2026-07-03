@@ -9,7 +9,7 @@ import { Footer } from '../../shared/footer/footer';
 import { inr } from '../../core/utils/price.utils';
 import { categoryIconPath, iconPath } from '../../core/utils/icon.utils';
 import { pooledProductImage } from '../../core/utils/product-image.utils';
-import { manufacturerLogoPath, manufacturerLogoIsDark } from '../../core/utils/manufacturer.utils';
+import { ALL_MANUFACTURERS, manufacturerLogoPath, manufacturerLogoIsDark } from '../../core/utils/manufacturer.utils';
 import { ThemeService } from '../../core/services/theme.service';
 
 const CATEGORIES = [
@@ -27,11 +27,6 @@ const CATEGORIES = [
   { name: 'Tools & Supplies', icon: '🔧', sub: 'Soldering, Test Equipment', count: '48K parts' }
 ];
 
-const MANUFACTURERS = [
-  'Texas Instruments', 'STMicroelectronics', 'NXP', 'Infineon',
-  'Analog Devices', 'Microchip', 'Renesas', 'Vishay'
-];
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -46,11 +41,12 @@ export class Home implements OnInit {
 
   trending = signal<Product[]>([]);
   categories = CATEGORIES;
-  manufacturers = MANUFACTURERS;
+  manufacturers = signal<string[]>([]);
   addedId = signal<number | null>(null);
 
   ngOnInit() {
     this.productService.getTrending().subscribe(p => this.trending.set(p));
+    this.manufacturers.set(ALL_MANUFACTURERS);
   }
 
   addToCart(product: Product) {

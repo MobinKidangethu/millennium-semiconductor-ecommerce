@@ -120,6 +120,9 @@
         </div>
       }
 
+      <!-- Back-order notice — shown when requested qty exceeds on-hand stock -->
+      <app-backorder-badge [product]="p" [qty]="quantity()"></app-backorder-badge>
+
       <!-- Request a Quote -->
       <a routerLink="/cart" class="btn-quote">📋 Request a Quote</a>
 

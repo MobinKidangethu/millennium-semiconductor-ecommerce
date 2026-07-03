@@ -16,7 +16,7 @@
         <a routerLink="/register">Register</a>
       }
       <span>|</span>
-      <a href="#">Order History</a>
+      <a routerLink="/orders">Order History</a>
       <span>|</span>
       <span>₹ INR</span>
       <span>|</span>
@@ -108,7 +108,7 @@
                 <strong>{{ user.name }}</strong>
                 <span>{{ user.email }}</span>
               </div>
-              <a href="#" class="account-menu__item">My Orders</a>
+              <a routerLink="/orders" (click)="showAccountMenu.set(false)" class="account-menu__item">My Orders</a>
               <a href="#" class="account-menu__item">Saved Lists</a>
               <button type="button" class="account-menu__item account-menu__item--danger" (click)="logout()">Sign Out</button>
             </div>
@@ -164,12 +164,30 @@
   <div class="sub-nav__inner">
     <div class="sub-nav__left">
       <a routerLink="/products" class="sub-nav__item sub-nav__item--active">Products ▾</a>
-      <a href="#" class="sub-nav__item">Manufacturers ▾</a>
-      <a href="#" class="sub-nav__item">New Products</a>
+      <div class="sub-nav__dropdown-wrap">
+        <button type="button" class="sub-nav__item sub-nav__item--btn" (click)="toggleManufacturersMenu($event)">Manufacturers ▾</button>
+        @if (showManufacturersMenu()) {
+          <div class="manufacturers-menu" (click)="$event.stopPropagation()">
+            @for (mfr of manufacturers; track mfr) {
+              <a [routerLink]="['/manufacturer', mfr]" class="manufacturers-menu__item" (click)="showManufacturersMenu.set(false)">
+                @if (manufacturerLogo(mfr); as logo) {
+                  <span class="manufacturers-menu__logo" [class.manufacturers-menu__logo--dark]="manufacturerLogoDark(mfr)">
+                    <img [src]="logo" [alt]="mfr" />
+                  </span>
+                } @else {
+                  <span class="manufacturers-menu__logo manufacturers-menu__logo--initial">{{ mfr[0] }}</span>
+                }
+                <span>{{ mfr }}</span>
+              </a>
+            }
+          </div>
+        }
+      </div>
+      <a routerLink="/products" [queryParams]="{ tag: 'new' }" class="sub-nav__item">New Products</a>
     </div>
     <div class="sub-nav__right">
       <a href="#" class="sub-nav__promo">🏷 Promotions</a>
-      <a href="#" class="sub-nav__track">🚚 Track Order</a>
+      <a routerLink="/orders" class="sub-nav__track">🚚 Track Order</a>
     </div>
   </div>
 </nav>

@@ -235,10 +235,18 @@
     font-size: 13px;
     font-weight: 500;
     transition: background 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
 
     &:hover { background: rgba(255,255,255,0.1); }
 
     &--active { background: rgba(255,255,255,0.15); }
+  }
+
+  &__dropdown-wrap {
+    position: relative;
   }
 
   &__right {
@@ -417,6 +425,63 @@
   background: #e6f9ed;
   color: #1a8040;
   border-radius: 10px;
+}
+
+// ─── Manufacturers dropdown ─────────────────────────────────────────────────
+.manufacturers-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 480px;
+  max-width: 90vw;
+  background: white;
+  border: 1px solid #e0e6ee;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+  z-index: 1100;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.15s;
+
+    &:hover { background: #f5f7fa; }
+  }
+
+  &__logo {
+    flex-shrink: 0;
+    width: 40px;
+    height: 26px;
+    border-radius: 4px;
+    background: white;
+    border: 1px solid #eef1f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+
+    img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+    &--dark { background: #1a1a2e; border-color: #1a1a2e; }
+
+    &--initial {
+      background: var(--color-primary);
+      color: white;
+      font-weight: 800;
+      font-size: 12px;
+    }
+  }
 }
 
 // ─── Added to Cart popup ───────────────────────────────────────────────────────

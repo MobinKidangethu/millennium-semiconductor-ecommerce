@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   loginWithGoogle(): User {
-    const user: User = { name: 'Alex Rivera', email: 'alex.rivera@gmail.com' };
+    const user: User = { name: 'Gajanan Deo', email: 'gajanan.deo@google.com' };
     const users = this.getUsers();
     if (!users.find(u => u.email.toLowerCase() === user.email.toLowerCase())) {
       users.push({ ...user, password: '' });
@@ -91,7 +91,10 @@ export class AuthService {
     const raw = localStorage.getItem(USERS_KEY);
     if (raw) return JSON.parse(raw);
     const seeded: StoredUser[] = [
-      { name: 'Robert Chen', email: 'demo@millenniumsemi.com', password: 'demo1234' }
+      { name: 'Mobin Peter', email: 'mobin@devon.nl', password: 'pass-mobin' },
+      { name: 'Shashank Awasthi', email: 'shashank@devon.nl', password: 'pass-shashank' },
+      { name: 'Gautam Bhatt', email: 'gautam@devon.nl', password: 'pass-gautam' },
+      { name: 'Gajanan Deo', email: 'gajanan@devon.nl', password: 'pass-gajanan' }
     ];
     localStorage.setItem(USERS_KEY, JSON.stringify(seeded));
     return seeded;

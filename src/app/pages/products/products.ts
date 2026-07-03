@@ -32,6 +32,7 @@ export class Products implements OnInit {
   rowQty = signal<Record<number, number>>({});
   searchQuery = signal<string>('');
   categoryParam = signal<string>('');
+  tagFilter = signal<string>('');
 
   // Sort & view
   sortBy = signal<string>('relevance');
@@ -67,6 +68,8 @@ export class Products implements OnInit {
 
     this.route.queryParams.subscribe(qp => {
       this.searchQuery.set(qp['q'] || '');
+      this.tagFilter.set(qp['tag'] || '');
+      this.selectedManufacturers.set(qp['manufacturer'] ? new Set([qp['manufacturer']]) : new Set());
       this.currentPage.set(1);
     });
   }
@@ -91,6 +94,7 @@ export class Products implements OnInit {
 
   get pageTitle(): string {
     if (this.searchQuery()) return `Search: "${this.searchQuery()}"`;
+    if (this.tagFilter() === 'new') return 'New Products';
     if (this.categoryParam()) {
       return this.categoryParam()
         .split('-')
@@ -112,6 +116,11 @@ export class Products implements OnInit {
         p.manufacturer.toLowerCase().includes(q) ||
         p.productType.toLowerCase().includes(q)
       );
+    }
+
+    if (this.tagFilter()) {
+      const tag = this.tagFilter();
+      results = results.filter(p => p.tags?.includes(tag));
     }
 
     if (this.selectedManufacturers().size > 0) {

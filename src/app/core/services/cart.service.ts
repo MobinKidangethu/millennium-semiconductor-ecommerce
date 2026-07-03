@@ -1,5 +1,6 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { CartItem, Product } from '../models/product.model';
+import { getBackorderInfo } from '../utils/backorder.utils';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
@@ -18,6 +19,10 @@ export class CartService {
   tax = computed(() => +(this.subtotal() * 0.18).toFixed(2));
 
   total = computed(() => +(this.subtotal() + this.tax()).toFixed(2));
+
+  hasBackorderedItems = computed(() =>
+    this._items().some(i => getBackorderInfo(i.product.availability, i.qty).isBackordered)
+  );
 
   add(product: Product, qty = 1) {
     this._items.update(items => {

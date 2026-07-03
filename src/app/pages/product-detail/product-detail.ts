@@ -7,6 +7,7 @@ import { CartService } from '../../core/services/cart.service';
 import { Product } from '../../core/models/product.model';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
+import { BackorderBadge } from '../../shared/backorder-badge/backorder-badge';
 import { inr, priceBreaksINR } from '../../core/utils/price.utils';
 import { categoryIconPath, iconPath } from '../../core/utils/icon.utils';
 import { manufacturerLogoPath, manufacturerLogoIsDark } from '../../core/utils/manufacturer.utils';
@@ -15,7 +16,7 @@ import { ThemeService } from '../../core/services/theme.service';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [RouterLink, CommonModule, FormsModule, Header, Footer],
+  imports: [RouterLink, CommonModule, FormsModule, Header, Footer, BackorderBadge],
   templateUrl: './product-detail.html',
   styleUrls: ['./product-detail.scss']
 })
