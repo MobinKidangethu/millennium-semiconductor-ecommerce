@@ -44,6 +44,7 @@ export interface Address {
   phone: string;
   po: string;
   isDefault?: boolean;
+  label?: string;
 }
 
 export interface ShippingMethod {

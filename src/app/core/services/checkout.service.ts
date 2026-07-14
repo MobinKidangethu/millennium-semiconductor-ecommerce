@@ -21,7 +21,16 @@ export class CheckoutService {
       address2: 'Outer Ring Road, Devarabisanahalli, Varthur Hobli',
       city: 'Bengaluru', zip: '560087', state: 'Karnataka',
       country: 'India', phone: '', po: '',
-      isDefault: true
+      isDefault: true, label: 'Home'
+    },
+    {
+      firstName: 'DevOn', lastName: 'Team',
+      company: 'Devon Software Services (DevOn)',
+      address1: 'Lumen Tech Park, 4th Floor, Sector 5',
+      address2: 'HSR Layout',
+      city: 'Bengaluru', zip: '560102', state: 'Karnataka',
+      country: 'India', phone: '', po: '',
+      isDefault: false, label: 'Office'
     }
   ]);
 

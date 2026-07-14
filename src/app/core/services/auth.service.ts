@@ -55,6 +55,13 @@ export class AuthService {
     this.setSession(null);
   }
 
+  updateProfile(update: { name?: string; email?: string; phone?: string }) {
+    const current = this.currentUser();
+    if (!current) return;
+    const next: User = { ...current, ...update };
+    this.setSession(next);
+  }
+
   // Simulates sending a password-reset email; returns the token that
   // would normally be delivered via email link.
   requestPasswordReset(email: string): { success: boolean; token?: string; error?: string } {
