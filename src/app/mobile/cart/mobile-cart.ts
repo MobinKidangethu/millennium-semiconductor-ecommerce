@@ -36,9 +36,9 @@ import { MobileDrawer } from '../shell/mobile-drawer';
                 <div class="m-cart__item-pn">{{ item.product.manufacturerPartNumber }}</div>
                 <div class="m-cart__item-desc">{{ item.product.title }}</div>
                 <div class="m-cart__item-tags">
-                  <span class="m-cart__tag">{{ item.product.mountingStyle || 'Non-Metal' }}</span>
-                  <span class="m-cart__tag">{{ item.product.package || 'M12' }}</span>
-                  <span class="m-cart__tag">Stock</span>
+                  <span class="m-cart__tag">{{ item.product.mountingStyle }}</span>
+                  <span class="m-cart__tag">{{ item.product.package }}</span>
+                  <span class="m-cart__tag">{{ item.product.stockStatus }}</span>
                 </div>
               </div>
               <button class="m-cart__item-del" (click)="cart.remove(item.product.id)">🗑</button>

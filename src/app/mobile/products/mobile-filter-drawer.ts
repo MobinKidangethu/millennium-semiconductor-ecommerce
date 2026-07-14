@@ -1,13 +1,19 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-const MANUFACTURERS = [
-  { name: 'Adafruit', count: 42 },
-  { name: 'Advanced Linear Devices', count: 128 },
-  { name: 'Ampleon', count: 15 },
-  { name: 'Analog Devices Inc.', count: 1240 },
-  { name: 'APC-E', count: 3 },
-];
+export interface MobileFilterState {
+  manufacturers: string[];
+  productTypes: string[];
+  mountingStyles: string[];
+  selectedManufacturers: Set<string>;
+  selectedProductTypes: Set<string>;
+  selectedMountingStyles: Set<string>;
+  inStockOnly: boolean;
+  rohsOnly: boolean;
+  priceMin: number;
+  priceMax: number;
+  globalMaxPrice: number;
+}
 
 @Component({
   selector: 'app-mobile-filter-drawer',
@@ -19,41 +25,58 @@ const MANUFACTURERS = [
       <div class="m-filter__header">
         <button (click)="close.emit()" class="m-filter__x">✕</button>
         <h2>Refine Results</h2>
-        <button class="m-filter__clear" (click)="clearAll()">Clear All</button>
+        <button class="m-filter__clear" (click)="clearAll.emit()">Clear All</button>
       </div>
 
       <div class="m-filter__body">
-        <div class="m-filter__search-label">Search within results</div>
-        <div class="m-filter__search-box">
-          <span>🔍</span>
-          <input [(ngModel)]="keyword" placeholder="Part No. / Keyword" />
+        <label class="m-filter__checkbox">
+          <input type="checkbox" [checked]="state().inStockOnly" (change)="toggleInStock.emit()" />
+          In Stock Only
+        </label>
+        <label class="m-filter__checkbox">
+          <input type="checkbox" [checked]="state().rohsOnly" (change)="toggleRohs.emit()" />
+          RoHS Compliant
+        </label>
+
+        <div class="m-filter__section-header">PRICE RANGE</div>
+        <div class="m-filter__price-row">
+          <input type="number" [ngModel]="state().priceMin" (ngModelChange)="priceMinChange.emit($event)" />
+          <span>—</span>
+          <input type="number" [ngModel]="state().priceMax" (ngModelChange)="priceMaxChange.emit($event)" />
         </div>
 
-        @for (opt of quickFilters(); track opt.label) {
-          <label class="m-filter__checkbox">
-            <input type="checkbox" [(ngModel)]="opt.checked" />
-            {{ opt.label }}
-          </label>
-        }
-
         <div class="m-filter__section-header">MANUFACTURER</div>
-        <div class="m-filter__mfr-list">
-          @for (m of manufacturers; track m.name) {
-            <label class="m-filter__mfr-row">
-              <span class="m-filter__mfr-check">
-                <input type="checkbox" [(ngModel)]="selectedMfrs[m.name]" />
-              </span>
-              <span class="m-filter__mfr-name">{{ m.name }}</span>
-              <span class="m-filter__mfr-count">{{ m.count }}</span>
+        <div class="m-filter__list">
+          @for (m of state().manufacturers; track m) {
+            <label class="m-filter__row">
+              <input type="checkbox" [checked]="state().selectedManufacturers.has(m)" (change)="toggleManufacturer.emit(m)" />
+              <span>{{ m }}</span>
             </label>
           }
         </div>
 
-        <div class="m-filter__section-header">PRODUCT TYPE ⌄</div>
-        <div class="m-filter__section-header">TECHNOLOGY ⌄</div>
+        <div class="m-filter__section-header">PRODUCT TYPE</div>
+        <div class="m-filter__list">
+          @for (t of state().productTypes; track t) {
+            <label class="m-filter__row">
+              <input type="checkbox" [checked]="state().selectedProductTypes.has(t)" (change)="toggleProductType.emit(t)" />
+              <span>{{ t }}</span>
+            </label>
+          }
+        </div>
+
+        <div class="m-filter__section-header">MOUNTING STYLE</div>
+        <div class="m-filter__list">
+          @for (s of state().mountingStyles; track s) {
+            <label class="m-filter__row">
+              <input type="checkbox" [checked]="state().selectedMountingStyles.has(s)" (change)="toggleMountingStyle.emit(s)" />
+              <span>{{ s }}</span>
+            </label>
+          }
+        </div>
       </div>
 
-      <button class="m-filter__apply" (click)="apply.emit()">Apply Filter</button>
+      <button class="m-filter__apply" (click)="close.emit()">Apply Filter</button>
     </div>
   `,
   styles: [`
@@ -64,34 +87,24 @@ const MANUFACTURERS = [
     .m-filter__x { background: none; border: none; font-size: 18px; }
     .m-filter__clear { background: none; border: none; color: var(--color-primary, #70284e); font-weight: 700; }
     .m-filter__body { flex: 1; overflow-y: auto; padding: 18px 16px; }
-    .m-filter__search-label { font-size: 13.5px; font-weight: 700; color: #333; margin-bottom: 8px; }
-    .m-filter__search-box { display: flex; align-items: center; gap: 10px; border: 1px solid #ddd; border-radius: 8px; padding: 11px 14px; margin-bottom: 18px; }
-    .m-filter__search-box input { border: none; outline: none; flex: 1; font-size: 14px; }
     .m-filter__checkbox { display: flex; align-items: center; gap: 12px; padding: 12px 0; font-size: 15px; color: #1a1a2e; border-bottom: 1px solid #f5f5f5; }
     .m-filter__section-header { font-size: 12.5px; font-weight: 800; color: #333; letter-spacing: 0.5px; padding: 16px 0 10px; border-top: 1px solid #eee; margin-top: 6px; }
-    .m-filter__mfr-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
-    .m-filter__mfr-name { flex: 1; font-size: 15px; color: #1a1a2e; }
-    .m-filter__mfr-count { color: #888; font-size: 13px; }
+    .m-filter__price-row { display: flex; align-items: center; gap: 10px; }
+    .m-filter__price-row input { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 10px; font-size: 14px; }
+    .m-filter__list { max-height: 200px; overflow-y: auto; }
+    .m-filter__row { display: flex; align-items: center; gap: 12px; padding: 9px 0; font-size: 14.5px; color: #1a1a2e; }
     .m-filter__apply { background: var(--color-primary, #70284e); color: #fff; border: none; padding: 16px; font-weight: 700; font-size: 15px; margin: 12px 16px 18px; border-radius: 8px; }
   `]
 })
 export class MobileFilterDrawer {
+  state = input.required<MobileFilterState>();
   close = output<void>();
-  apply = output<void>();
-  keyword = '';
-  manufacturers = MANUFACTURERS;
-  selectedMfrs: Record<string, boolean> = { 'Adafruit': true };
-  quickFilters = signal([
-    { label: 'In Stock', checked: false },
-    { label: 'Active', checked: false },
-    { label: 'RoHS Compliant', checked: false },
-    { label: 'Normally Stocked', checked: false },
-    { label: 'New Products', checked: false },
-  ]);
-
-  clearAll() {
-    this.keyword = '';
-    this.selectedMfrs = {};
-    this.quickFilters.update(list => list.map(f => ({ ...f, checked: false })));
-  }
+  clearAll = output<void>();
+  toggleInStock = output<void>();
+  toggleRohs = output<void>();
+  toggleManufacturer = output<string>();
+  toggleProductType = output<string>();
+  toggleMountingStyle = output<string>();
+  priceMinChange = output<number>();
+  priceMaxChange = output<number>();
 }

@@ -1,11 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
+import { ProductService } from '../../core/services/product.service';
 import { MobileBottomNav } from '../shell/mobile-bottom-nav';
 
-const RECENT = ['ARM Cortex M33', 'NXP LPC55S69', 'IN4007 Diode', 'STM32 microcontroller'];
-const TRENDING = ['Microcontrollers', 'Diodes', 'Capacitors', 'Resistors', 'MOSFETs', 'Arduino', 'Raspberry Pi', 'Voltage Regulators'];
+const RECENT_KEY = 'ms-mobile-recent-searches';
 
 @Component({
   selector: 'app-mobile-search',
@@ -23,22 +23,31 @@ const TRENDING = ['Microcontrollers', 'Diodes', 'Capacitors', 'Resistors', 'MOSF
     </header>
 
     <div class="m-search">
-      <div class="m-search__row">
-        <h2 class="m-search__heading">Recent Searches</h2>
-        <button class="m-search__clear" (click)="recent.set([])">Clear all</button>
-      </div>
-      @for (r of recent(); track r) {
-        <div class="m-search__recent-item" (click)="doSearch(r)">
-          <span class="m-search__recent-icon">🕐</span>
-          <span class="m-search__recent-text">{{ r }}</span>
-          <button class="m-search__recent-x" (click)="removeRecent(r, $event)">✕</button>
+      @if (recent().length > 0) {
+        <div class="m-search__row">
+          <h2 class="m-search__heading">Recent Searches</h2>
+          <button class="m-search__clear" (click)="clearRecent()">Clear all</button>
         </div>
+        @for (r of recent(); track r) {
+          <div class="m-search__recent-item" (click)="doSearch(r)">
+            <span class="m-search__recent-icon">🕐</span>
+            <span class="m-search__recent-text">{{ r }}</span>
+            <button class="m-search__recent-x" (click)="removeRecent(r, $event)">✕</button>
+          </div>
+        }
       }
 
-      <h2 class="m-search__heading" style="margin-top:24px">Trending Searches</h2>
+      <h2 class="m-search__heading" style="margin-top:24px">Browse by Category</h2>
       <div class="m-search__chips">
-        @for (t of trending; track t) {
-          <button class="m-search__chip" (click)="doSearch(t)">{{ t }}</button>
+        @for (c of categories; track c) {
+          <button class="m-search__chip" (click)="doSearch(c)">{{ c }}</button>
+        }
+      </div>
+
+      <h2 class="m-search__heading" style="margin-top:24px">Top Manufacturers</h2>
+      <div class="m-search__chips">
+        @for (m of manufacturers; track m) {
+          <button class="m-search__chip" (click)="doSearch(m)">{{ m }}</button>
         }
       </div>
     </div>
@@ -62,20 +71,46 @@ const TRENDING = ['Microcontrollers', 'Diodes', 'Capacitors', 'Resistors', 'MOSF
     .m-search__chip { background: #f2f2f5; border: none; border-radius: 999px; padding: 10px 16px; font-size: 13.5px; font-weight: 600; color: #333; }
   `]
 })
-export class MobileSearch {
+export class MobileSearch implements OnInit {
   location = inject(Location);
   router = inject(Router);
+  private productService = inject(ProductService);
+
   query = '';
-  recent = signal<string[]>([...RECENT]);
-  trending = TRENDING;
+  recent = signal<string[]>([]);
+  categories: string[] = [];
+  manufacturers: string[] = [];
+
+  ngOnInit() {
+    this.categories = this.productService.getCategories();
+    this.manufacturers = this.productService.getManufacturers().slice(0, 8);
+    try {
+      const stored = localStorage.getItem(RECENT_KEY);
+      this.recent.set(stored ? JSON.parse(stored) : []);
+    } catch {
+      this.recent.set([]);
+    }
+  }
 
   removeRecent(r: string, ev: Event) {
     ev.stopPropagation();
     this.recent.update(list => list.filter(x => x !== r));
+    this.persistRecent();
+  }
+
+  clearRecent() {
+    this.recent.set([]);
+    this.persistRecent();
+  }
+
+  private persistRecent() {
+    localStorage.setItem(RECENT_KEY, JSON.stringify(this.recent()));
   }
 
   doSearch(q: string) {
     if (!q) return;
+    this.recent.update(list => [q, ...list.filter(x => x !== q)].slice(0, 6));
+    this.persistRecent();
     this.router.navigate(['/m/products'], { queryParams: { q } });
   }
 }

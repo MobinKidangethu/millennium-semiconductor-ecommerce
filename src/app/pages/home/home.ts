@@ -12,7 +12,7 @@ import { pooledProductImage } from '../../core/utils/product-image.utils';
 import { ALL_MANUFACTURERS, manufacturerLogoPath, manufacturerLogoIsDark } from '../../core/utils/manufacturer.utils';
 import { ThemeService } from '../../core/services/theme.service';
 
-const CATEGORIES = [
+export const CATEGORIES = [
   { name: 'Semiconductors', icon: '💻', sub: 'ICs, Transistors, Diodes', count: '1.2M parts' },
   { name: 'Circuit Protection', icon: '⚡', sub: 'Fuses, TVS Devices, Varistors', count: '84K parts' },
   { name: 'Connectors', icon: '🔌', sub: 'USB, RF, Board-to-Board', count: '320K parts' },
